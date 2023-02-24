@@ -1,18 +1,19 @@
-import { Text, View } from "react-native";
-import colors from "./src/theme/colors";
-import fonts from "./src/theme/fonts";
-import AntDesign from "react-native-vector-icons/AntDesign";
+import { View, StyleSheet, ScrollView} from "react-native";
+import FeedPost from "./src/components/FeedPost/FeedPost";
 // https://oblador.github.io/react-native-vector-icons/ is the list of icons i can refer
 const App = () => {
   return (
-    <View>
-      <Text style={{color: colors.primary, fontSize: fonts.size.lg}}>
-        Hello
-        <AntDesign name="stepforward" size={30} color={colors.primary} />
-      </Text>
-
-    </View>
+    <ScrollView style={styles.app}>
+      <FeedPost />
+      <FeedPost />
+    </ScrollView>
   )
 };
+const styles = StyleSheet.create({
+  app: {
+    flex: 1,
+  },
+
+});
 
 export default App;
