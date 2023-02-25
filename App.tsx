@@ -1,12 +1,12 @@
-import { View, StyleSheet, ScrollView} from "react-native";
-import FeedPost from "./src/components/FeedPost/FeedPost";
-// https://oblador.github.io/react-native-vector-icons/ is the list of icons i can refer
+import { View, StyleSheet} from "react-native";
+import HomeScreen from "./src/screens/HomeScreen/HomeScreen";
+
+
 const App = () => {
   return (
-    <ScrollView style={styles.app}>
-      <FeedPost />
-      <FeedPost />
-    </ScrollView>
+    <View style={styles.app}>
+     <HomeScreen/>
+    </View>
   )
 };
 const styles = StyleSheet.create({

@@ -5,21 +5,30 @@ import Entypo from "react-native-vector-icons/Entypo";
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import Comment from "../Comment";
 import styles from "./styles";
+import { IPost } from "../../types/models";
 
 // https://oblador.github.io/react-native-vector-icons/ is the list of icons i can refer
-const FeedPost = () => {
+
+interface IFeedPost {
+  post: IPost
+};
+
+// Desctructure the post object directly
+const FeedPost = ({post}: IFeedPost) => {
+  
   return (
     <View style={styles.post}>
       {/* Header */}
       <View style={styles.header}>
-          <Image source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/1.jpg '}} style={styles.userAvatar} />
-          <Text style={styles.userName}>Etienne</Text>
+          <Image source={{uri: post.user.image}} style={styles.userAvatar} />
+          <Text style={styles.userName}>{post.user.username}</Text>
           <Entypo name="dots-three-horizontal" size={16} style={styles.threeDots} />
       </View>
 
       {/* Content */}
-      <Image source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/1.jpg '}} style={styles.image} />
+      <Image source={{uri: post.image}} style={styles.image} />
     
       {/* Footer */}
       <View style={styles.footer}>
@@ -33,27 +42,23 @@ const FeedPost = () => {
         {/* Likes */}
         <Text style={styles.text}>Liked by{' '}
             <Text style={styles.bold}>BAM</Text> and{' '}
-            <Text style={styles.bold}>66 others</Text> 
+            <Text style={styles.bold}>{post.nofLikes} others</Text> 
         </Text>
 
         {/* Post description */}
         <Text style={styles.text}>
-          <Text style={styles.bold}>Etienne</Text>{' '}
-          <Text style={styles.text}>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed sed nisl nec leo ultricies lacinia. Sed sed nisl nec leo ultricies lacinia. </Text>
+          <Text style={styles.bold}>{post.user.username}</Text>{' '}
+          <Text style={styles.text}>{post.description} </Text>
         </Text>
 
         {/* Comments */}
-        <Text>View all 16 comments</Text>
-        <View style={styles.comment}>
-          <Text style={styles.commentText}>
-            <Text style={styles.bold}>Valoute75</Text>{' '}
-            <Text style={styles.text}>C'est super joli, t'es en vacances au Canada ? On se voit à Vancouver! </Text>
-          </Text>
-          <AntDesign name={'hearto'} size={12} style={styles.icon} color={colors.black} />
-        </View>
+        <Text>View all {post.nofComments} comments</Text>
+        {post.comments.map(comment => (
+          <Comment key={comment.id} comment={comment} />
+        ))}
 
         {/* posted date */}
-        <Text>24 january, 2023</Text>
+        <Text>{post.createdAt}</Text>
       </View>
     </View>
   )

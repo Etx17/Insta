@@ -7,17 +7,7 @@ export default StyleSheet.create({
     },
     bold: {
       fontWeight: fonts.weight.bold,
-    },
-    comment: {
-      display: 'flex',
-      flexDirection: 'row',
-      alignItems: 'center',
-    },
-    commentText: {
-      color: colors.black,
-      flex: 1,
-      marginRight: 3
-    },
+    }, 
     text: {
       color: colors.black,
       lineHeight: 18,
