@@ -5,14 +5,6 @@ import comments from '../../assets/data/comments.json'
 import Comment from '../../components/Comment/Comment'
 import Input from './Input'
 const CommentsScreen = () => {
-    // Commencer par coder la liste des commentaires dans une vue scrollable
-        // Créer le composant commentaire adéquat
-        // Le rendre en Fatlist verticale
-            // importer les props
-
-    // Séparer le footer de la liste des commentaires
-        // Créer le composant footer
-        // 
 
   return (
     <View style={{flex: 1}}>
