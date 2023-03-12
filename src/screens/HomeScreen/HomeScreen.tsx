@@ -6,6 +6,7 @@ import posts from "../../assets/data/posts.json";
 
 
 const HomeScreen = () => {
+  
   const [activePostId, setActivePostId] = useState<string | null>(null);
 
   const viewabilityConfig: ViewabilityConfig = {
