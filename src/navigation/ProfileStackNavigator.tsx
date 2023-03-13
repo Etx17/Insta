@@ -1,10 +1,8 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
-import { Image } from "react-native";
-import instalogo from "../assets/images/instalogo.png";
 import EditProfileScreen from "../screens/EditProfileScreen/EditProfileScreen";
-import ProfileStackNavigatorParamsList from './types'
+import {ProfileStackNavigatorParamsList} from '../types/navigation'
 
 const Stack = createNativeStackNavigator<ProfileStackNavigatorParamsList>();
 

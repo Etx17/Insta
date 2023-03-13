@@ -6,7 +6,7 @@ import { Image } from 'react-native';
 import instalogo from '../assets/images/instalogo.png';
 import BottomTabNavigator from './BottomTabNavigator';
 import CommentsScreen from '../screens/CommentsScreen/CommentsScreen';
-import {RootNavigatorParamsList} from './types'
+import {RootNavigatorParamsList} from '../types/navigation'
 
 
 const Stack = createNativeStackNavigator<RootNavigatorParamsList>();
