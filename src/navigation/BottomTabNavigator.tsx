@@ -7,7 +7,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import colors from '../theme/colors';
 import HomeStackNavigator from './HomeStackNavigator';
-const Tab = createBottomTabNavigator();
+import ProfileStackNavigator from './ProfileStackNavigator';
+import BottomTabNavigatorParamsList from "./types"
+
+const Tab = createBottomTabNavigator<BottomTabNavigatorParamsList>();
 
 const BottomTabNavigator = () => {
     return (
@@ -51,8 +54,9 @@ const BottomTabNavigator = () => {
              />
             <Tab.Screen 
                 name="MyProfile" 
-                component={ProfileScreen} 
+                component={ProfileStackNavigator} 
                 options={{
+                  headerShown: false,
                   tabBarIcon: ({color, size}) => 
                       <FontAwesome  name="user-circle-o" size={size} color={color} /> 
                 }}

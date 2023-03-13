@@ -3,8 +3,14 @@ import React from 'react'
 import user from '../../assets/data/user.json'
 import styles from './styles'
 import Button from '../../components/Button'
+import { useNavigation } from '@react-navigation/native';
+import { ProfileNavigationProp } from '../../navigation/types';
 
 const ProfileHeader = () => {
+    const navigation = useNavigation<ProfileNavigationProp>();
+    const navigateToEditProfileScreen = () => {
+        navigation.navigate("EditProfile")
+    }
     return (
       <View style={styles.root}>
           {/* Header Row */}
@@ -38,7 +44,8 @@ const ProfileHeader = () => {
           <View style={styles.buttonsContainer}>
               <Button 
               text="Edit Profile" 
-              onPress={() => console.warn('Pressed')}
+              onPress={() => navigateToEditProfileScreen()}
+
               />
               <Button 
               text="Another Button" 
