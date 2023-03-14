@@ -36,7 +36,11 @@ const SignUpScreen = () => {
       await Auth.signUp({
         username: username,
         password: password,
-        attributes: { email, name, preferred_username},
+        attributes: { 
+          email, 
+          name, 
+          // preferred_username
+        },
       });
       navigation.navigate('Confirm email', {username});
     } catch (e) {
@@ -101,7 +105,7 @@ const SignUpScreen = () => {
           }}
         />
 
-        <FormInput
+        {/* <FormInput
           name="preferred_username"
           control={control}
           placeholder="Preffered username"
@@ -120,7 +124,7 @@ const SignUpScreen = () => {
               message: 'Preffered username can only contain a-z, 0-9, _',
             },
           }}
-        />
+        /> */}
 
         <FormInput
           name="email"

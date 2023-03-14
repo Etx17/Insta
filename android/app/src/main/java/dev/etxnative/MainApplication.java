@@ -1,4 +1,4 @@
-package dev.instaglam.etx;
+package dev.etxnative;
 
 import android.app.Application;
 import com.facebook.react.PackageList;

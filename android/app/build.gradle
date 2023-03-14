@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "dev.instaglam.etx"
+    namespace "dev.etxnative"
     defaultConfig {
-        applicationId "dev.instaglam.etx"
+        applicationId "dev.etxnative"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
