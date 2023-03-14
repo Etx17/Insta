@@ -3,11 +3,12 @@ import instalogo from '../../../assets/images/instalogo.png';
 import FormInput from '../components/FormInput';
 import CustomButton from '../components/CustomButton';
 import SocialSignInButtons from '../components/SocialSignInButtons';
-import {useNavigation} from '@react-navigation/native';
-import {useForm} from 'react-hook-form';
-import {SignInNavigationProp} from '../../../types/navigation';
+import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
+import { SignInNavigationProp } from '../../../types/navigation';
 import { Auth } from 'aws-amplify';
 import { useState } from 'react';
+import { useAuthContext } from '../../../contexts/AuthContext';
 type SignInData = {
   username: string;
   password: string;
@@ -17,6 +18,7 @@ const SignInScreen = () => {
   const {height} = useWindowDimensions();
   const navigation = useNavigation<SignInNavigationProp>();
   const [loading, setLoading] = useState(false);
+  const {setUser} = useAuthContext();
   const {control, handleSubmit, reset} = useForm<SignInData>();
 
   const onSignInPressed = async ({username, password}: SignInData) => {
@@ -25,9 +27,9 @@ const SignInScreen = () => {
     }
     setLoading(true);
     try {
-      const response = await Auth.signIn(username, password);
-      console.log(response);
+      const cognitoUser = await Auth.signIn(username, password);
       // TODO save user data in context
+      setUser(cognitoUser)
 
     } catch (e) {
       Alert.alert('Oops', (e as Error).message)

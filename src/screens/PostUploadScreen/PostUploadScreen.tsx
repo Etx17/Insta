@@ -29,7 +29,6 @@ const [isRecording, setIsRecording] = useState(false)
 
   const toggleFlash = () => {
     setFlash(currentFlash => currentFlash === 'off' ? 'on' : 'off')
-    console.log(flash)
   }
 
   const takePicture = async () => {
@@ -68,7 +67,6 @@ const [isRecording, setIsRecording] = useState(false)
     setIsRecording(false)
     if (camera.current !== null) {
       const video = await camera.current.stopRecording();
-      // console.log(video, 'this is from StopRecording');
     }
   }
 
