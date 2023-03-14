@@ -13,4 +13,5 @@ const App = () => {
   );
 };
 // customize theme
-export default withAuthenticator(App);
+// export default withAuthenticator(App);
+export default App;

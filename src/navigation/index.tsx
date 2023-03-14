@@ -7,6 +7,7 @@ import instalogo from '../assets/images/instalogo.png';
 import BottomTabNavigator from './BottomTabNavigator';
 import CommentsScreen from '../screens/CommentsScreen/CommentsScreen';
 import {RootNavigatorParamsList} from '../types/navigation'
+import AuthStackNavigator from './AuthStackNavigator';
 
 
 const Stack = createNativeStackNavigator<RootNavigatorParamsList>();
@@ -34,7 +35,13 @@ const linking: LinkingOptions<RootNavigatorParamsList> = {
 const Navigation = () => {
     return (
         <NavigationContainer linking={linking}>
-            <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown: true}} >
+            <Stack.Navigator initialRouteName="Auth" screenOptions={{headerShown: true}} >
+
+                <Stack.Screen 
+                    name="Auth" 
+                    component={AuthStackNavigator} 
+                    options={{headerShown: false}} 
+                />
 
                 <Stack.Screen 
                     name="Home" 
