@@ -4,8 +4,8 @@ import user from '../../assets/data/user.json'
 import styles from './styles'
 import Button from '../../components/Button'
 import { useNavigation } from '@react-navigation/native';
-import { ProfileNavigationProp } from '../../types/types';
-
+import { ProfileNavigationProp } from '../../types/navigation';
+import { Auth } from 'aws-amplify'
 const ProfileHeader = () => {
     const navigation = useNavigation<ProfileNavigationProp>();
     const navigateToEditProfileScreen = () => {
@@ -43,18 +43,14 @@ const ProfileHeader = () => {
           {/* Edit Profile Button */}
           <View style={styles.buttonsContainer}>
               <Button 
-              text="Edit Profile" 
-              onPress={() => navigateToEditProfileScreen()}
-
+                text="Edit Profile" 
+                onPress={() => navigateToEditProfileScreen()}
               />
               <Button 
-              text="Another Button" 
-              onPress={() => console.warn('Pressed')}
+                text="Log Out" 
+                onPress={() => Auth.signOut()}
               />
           </View>
-  
-          
-  
       </View>
     )
   }
