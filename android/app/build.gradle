@@ -93,9 +93,9 @@ android {
 
     compileSdkVersion rootProject.ext.compileSdkVersion
 
-    namespace "com.insta"
+    namespace "dev.instaglam.etx"
     defaultConfig {
-        applicationId "com.insta"
+        applicationId "dev.instaglam.etx"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
