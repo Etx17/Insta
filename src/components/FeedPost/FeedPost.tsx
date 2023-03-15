@@ -1,13 +1,5 @@
 import {useState} from 'react';
-import {
-  View,
-  Text,
-  LayoutAnimation,
-  Image,
-  Pressable,
-  Platform,
-  UIManager,
-} from 'react-native';
+import { View, Text, LayoutAnimation, Image, Pressable, Platform, UIManager, } from 'react-native';
 import colors from '../../theme/colors';
 import Comment from '../Comment';
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -15,15 +7,16 @@ import AntDesign from 'react-native-vector-icons/AntDesign';
 import Feather from 'react-native-vector-icons/Feather';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import styles from './styles';
-import {IPost} from '../../types/models';
 import DoublePressable from '../DoublePressable';
 import Carousel from '../Carousel';
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import { useNavigation } from '@react-navigation/native';
 import {FeedNavigationProp} from '../../types/types';
+import { Post } from '../../API';
+import {DEFAULT_USER_IMAGE} from '../../config'
 
 interface IFeedPost {
-  post: IPost;
+  post: Post
   isVisible: boolean;
 }
 
@@ -35,7 +28,9 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   const navigation = useNavigation<FeedNavigationProp>();
 
   const navigateToUser = () => {
-    navigation.navigate('UserProfile', {userId: post.user.id});
+    if(post.User){
+      navigation.navigate('UserProfile', {userId: post.User.id});
+    }
   };
 
   const navigateToComments = () => {
@@ -77,11 +72,11 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
       <View style={styles.header}>
         <Image
           source={{
-            uri: post.user.image,
+            uri: post.User?.image || DEFAULT_USER_IMAGE,
           }}
           style={styles.userAvatar}
         />
-        <Text onPress={navigateToUser} style={styles.userName}>{post.user.username}</Text>
+        <Text onPress={navigateToUser} style={styles.userName}>{post.User?.username}</Text>
 
         <Entypo
           name="dots-three-horizontal"
@@ -134,7 +129,7 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
 
         {/* Post description */}
         <Text style={styles.text} numberOfLines={isDescriptionExpanded ? 0 : 3}>
-          <Text style={styles.bold}>{post.user.username}</Text>{' '}
+          <Text style={styles.bold}>{post.User?.username}</Text>{' '}
           {post.description}
         </Text>
 
@@ -144,8 +139,8 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
 
         {/* Comments */}
         <Text onPress={navigateToComments}>View all {post.nofComments} comments</Text>
-        {post.comments.map(comment => (
-          <Comment key={comment.id} comment={comment} />
+        {(post.Comments?.items || []).map(comment => (
+          comment && <Comment key={comment.id} comment={comment} />
         ))}
 
         {/* Posted date */}
