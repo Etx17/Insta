@@ -11,6 +11,8 @@ const ProfileHeader = () => {
     const navigateToEditProfileScreen = () => {
         navigation.navigate("EditProfile")
     }
+    console.log(user.image);
+    
     return (
       <View style={styles.root}>
           {/* Header Row */}
@@ -45,10 +47,12 @@ const ProfileHeader = () => {
               <Button 
                 text="Edit Profile" 
                 onPress={() => navigateToEditProfileScreen()}
+                inline
               />
               <Button 
                 text="Log Out" 
                 onPress={() => Auth.signOut()}
+                inline
               />
           </View>
       </View>
