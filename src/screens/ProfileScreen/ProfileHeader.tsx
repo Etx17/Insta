@@ -1,12 +1,20 @@
 import { View, Text, Image } from 'react-native'
 import React from 'react'
-import user from '../../assets/data/user.json'
 import styles from './styles'
 import Button from '../../components/Button'
 import { useNavigation } from '@react-navigation/native';
 import { ProfileNavigationProp } from '../../types/navigation';
 import { Auth } from 'aws-amplify'
-const ProfileHeader = () => {
+import { User } from '../../API'
+import { DEFAULT_USER_IMAGE } from '../../config';
+import { useAuthContext } from '../../contexts/AuthContext';
+
+interface IProfileHeader {
+    user: User;
+
+}
+const ProfileHeader = ({user}: IProfileHeader) => {
+    const {userId} = useAuthContext();
     const navigation = useNavigation<ProfileNavigationProp>();
     const navigateToEditProfileScreen = () => {
         navigation.navigate("EditProfile")
@@ -18,20 +26,20 @@ const ProfileHeader = () => {
           {/* Header Row */}
           <View style={styles.headerRow}>
               {/* Profile Image */}
-              <Image source={{uri: user.image}} style={styles.avatar}></Image>
+              <Image source={{uri: user.image || DEFAULT_USER_IMAGE}} style={styles.avatar}></Image>
               {/* Posts, Follower, Following NUmber */}
               <View style={styles.numberContainer}>
-                  <Text style={styles.numberText}>98</Text>
+                  <Text style={styles.numberText}>{user.nofPosts}</Text>
                   <Text>Posts</Text>
               </View>
   
               <View style={styles.numberContainer}>
-                  <Text style={styles.numberText}>498</Text>
+                  <Text style={styles.numberText}>{user.nofFollowers}</Text>
                   <Text>Followers</Text>
               </View>
   
               <View style={styles.numberContainer}>
-                  <Text style={styles.numberText}>398</Text>
+                  <Text style={styles.numberText}>{user.nofFollowings}</Text>
                   <Text>Following</Text>
               </View>
           </View>
@@ -43,18 +51,17 @@ const ProfileHeader = () => {
           <Text style={styles.bio}>{user.bio}</Text>
   
           {/* Edit Profile Button */}
-          <View style={styles.buttonsContainer}>
-              <Button 
-                text="Edit Profile" 
-                onPress={() => navigateToEditProfileScreen()}
-                inline
-              />
-              <Button 
-                text="Log Out" 
-                onPress={() => Auth.signOut()}
-                inline
-              />
-          </View>
+          {userId === user.id && (
+            <View style={styles.buttonsContainer}>
+                <Button 
+                    text="Edit Profile" 
+                    onPress={() => navigateToEditProfileScreen()}
+                    inline
+                />
+                <Button text="Log Out" onPress={() => Auth.signOut()} inline />
+            </View>
+          )}
+            
       </View>
     )
   }

@@ -18,6 +18,18 @@ export const onCreateLike = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
         username
         createdAt
         updatedAt
@@ -34,6 +46,31 @@ export const onCreateLike = /* GraphQL */ `
         nofComments
         nofLikes
         userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -64,6 +101,18 @@ export const onUpdateLike = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
         username
         createdAt
         updatedAt
@@ -80,6 +129,31 @@ export const onUpdateLike = /* GraphQL */ `
         nofComments
         nofLikes
         userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -110,6 +184,18 @@ export const onDeleteLike = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
         username
         createdAt
         updatedAt
@@ -126,6 +212,31 @@ export const onDeleteLike = /* GraphQL */ `
         nofComments
         nofLikes
         userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -157,6 +268,18 @@ export const onCreateComment = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
         username
         createdAt
         updatedAt
@@ -173,6 +296,31 @@ export const onCreateComment = /* GraphQL */ `
         nofComments
         nofLikes
         userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -204,6 +352,18 @@ export const onUpdateComment = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
         username
         createdAt
         updatedAt
@@ -220,6 +380,31 @@ export const onUpdateComment = /* GraphQL */ `
         nofComments
         nofLikes
         userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -251,6 +436,18 @@ export const onDeleteComment = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
         username
         createdAt
         updatedAt
@@ -267,6 +464,31 @@ export const onDeleteComment = /* GraphQL */ `
         nofComments
         nofLikes
         userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -302,6 +524,18 @@ export const onCreatePost = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
         username
         createdAt
         updatedAt
@@ -310,10 +544,31 @@ export const onCreatePost = /* GraphQL */ `
         _lastChangedAt
       }
       Likes {
+        items {
+          id
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Comments {
+        items {
+          id
+          comment
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
@@ -346,6 +601,18 @@ export const onUpdatePost = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
         username
         createdAt
         updatedAt
@@ -354,10 +621,31 @@ export const onUpdatePost = /* GraphQL */ `
         _lastChangedAt
       }
       Likes {
+        items {
+          id
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Comments {
+        items {
+          id
+          comment
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
@@ -390,6 +678,18 @@ export const onDeletePost = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
+        Posts {
+          nextToken
+          startedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
         username
         createdAt
         updatedAt
@@ -398,10 +698,31 @@ export const onDeletePost = /* GraphQL */ `
         _lastChangedAt
       }
       Likes {
+        items {
+          id
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Comments {
+        items {
+          id
+          comment
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
@@ -426,14 +747,50 @@ export const onCreateUser = /* GraphQL */ `
       nofFollowings
       image
       Posts {
+        items {
+          id
+          description
+          image
+          images
+          video
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Comments {
+        items {
+          id
+          comment
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Likes {
+        items {
+          id
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
@@ -459,14 +816,50 @@ export const onUpdateUser = /* GraphQL */ `
       nofFollowings
       image
       Posts {
+        items {
+          id
+          description
+          image
+          images
+          video
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Comments {
+        items {
+          id
+          comment
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Likes {
+        items {
+          id
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
@@ -492,14 +885,50 @@ export const onDeleteUser = /* GraphQL */ `
       nofFollowings
       image
       Posts {
+        items {
+          id
+          description
+          image
+          images
+          video
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Comments {
+        items {
+          id
+          comment
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }
       Likes {
+        items {
+          id
+          userID
+          postID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
         nextToken
         startedAt
       }

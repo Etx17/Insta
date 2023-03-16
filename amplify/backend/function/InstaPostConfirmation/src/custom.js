@@ -56,7 +56,14 @@ exports.handler = async (event, context) => {
 
   const {sub, name, email} = event.request.userAttributes;
 
-  const newUser = { id: sub, name, email }
+  const newUser = { 
+    id: sub, 
+    name, 
+    email,
+    nofPosts: 0,
+    nofFollowers: 0,
+    nofFollowings: 0,
+  }
 
   // check if user already exists 
   // const user = await context.amplify.invokePluginMethod(context, 'awscloudformation', undefined, 'getUser', [sub]);

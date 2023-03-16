@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     margin: 20,
   },
   message: {
-    color: colors.grey,
+    color: "grey",
     marginBottom: 10,
   },
 });

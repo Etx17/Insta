@@ -19,7 +19,7 @@
       "function": {
         "InstaPostConfirmation": {
           "deploymentBucketName": "amplify-insta-staging-165210-deployment",
-          "s3Key": "amplify-builds/InstaPostConfirmation-4843624a63463966356a-build.zip"
+          "s3Key": "amplify-builds/InstaPostConfirmation-75474155553369745552-build.zip"
         }
       },
       "api": {

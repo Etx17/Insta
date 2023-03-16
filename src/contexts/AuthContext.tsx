@@ -8,10 +8,12 @@ type UserType = CognitoUser | null | undefined
 
 type AuthContextType ={
     user: UserType,
+    userId: string,
 }
 
 export const AuthContext = createContext<AuthContextType>({
     user: undefined,
+    userId: "",
 })
 
 
@@ -46,9 +48,8 @@ const AuthContextProvider = ({children}: {children: ReactNode}) => {
     // When you return a function frm a useEffect, it will be called when the component unmounts
         return () => hubListener();
     }, [])
-
     return (
-        <AuthContext.Provider value={{user}}>
+        <AuthContext.Provider value={{user, userId: user?.attributes.sub}}>
             {children}
         </AuthContext.Provider>
     )
