@@ -1,74 +1,16 @@
-import { FlatList, ViewabilityConfig, ViewToken} from "react-native";
-import {useRef, useState, useEffect} from "react";
+import { FlatList, ViewabilityConfig, ViewToken, Text, ActivityIndicator} from "react-native";
+import { useRef, useState } from "react";
 import FeedPost from "../../components/FeedPost/FeedPost";
-import posts from "../../assets/data/posts.json";
-import { API, graphqlOperation } from "aws-amplify";
+import { useQuery } from "@apollo/client";
+import { listPosts } from "./queries";
 
-
-export const listPosts = /* GraphQL */ `
-  query ListPosts(
-    $filter: ModelPostFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listPosts(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        description
-        image
-        images
-        video
-        nofComments
-        nofLikes
-        userID
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-        User {
-          id
-          name
-          image
-          username
-        }
-        Comments {
-          items {
-            id
-            comment
-            User {
-              id
-              name
-              username
-            }
-          }
-        }
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 
 
 const HomeScreen = () => {
   
   const [activePostId, setActivePostId] = useState<string | null>(null);
-  const [posts, setPosts] = useState([]);
 
-  const fetchPosts = async () => {
-    try {
-      const response = await API.graphql(graphqlOperation(listPosts));
-      console.log(response?.data)
-      setPosts(response?.data?.listPosts.items);
-    } catch (e) {
-      console.log(e);
-    }
-  };
-
-  useEffect(() => {
-    fetchPosts();
-  }, []);
+  const {data, loading, error} = useQuery(listPosts);
 
   const viewabilityConfig: ViewabilityConfig = {
     itemVisiblePercentThreshold: 51,
@@ -82,10 +24,16 @@ const HomeScreen = () => {
     },
   );
 
+  if (loading) { return <ActivityIndicator/>; }
+
+  if (error) { return <Text>{error.message}</Text>; }
+
+  const posts = data.listPosts.items;
+
   return (
       <FlatList
         data = {posts}
-        renderItem={({item}) => <FeedPost post={item} isVisible={activePostId === item.id}/>}
+        renderItem={({item}) => <FeedPost post={item} isVisible={activePostId === item?.id}/>}
         showsVerticalScrollIndicator={false}
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={onViewableItemsChanged.current}
