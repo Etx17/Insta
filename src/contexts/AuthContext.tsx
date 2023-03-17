@@ -49,7 +49,7 @@ const AuthContextProvider = ({children}: {children: ReactNode}) => {
         return () => hubListener();
     }, [])
     return (
-        <AuthContext.Provider value={{user, userId: user?.attributes.sub}}>
+        <AuthContext.Provider value={{user, userId: user?.attributes?.sub}}>
             {children}
         </AuthContext.Provider>
     )

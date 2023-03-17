@@ -6,9 +6,11 @@ import FeedGridItem from './FeedGridItem';
 interface IFeedGridView {
     data: (Post | null)[];
     ListHeaderComponent?:  | React.ComponentType<any> | React.ReactElement | null | undefined;
+    refetch: () => void;
+    loading: boolean;
 }
 
-const FeedeGridView = ({data, ListHeaderComponent}: IFeedGridView) => {
+const FeedeGridView = ({data, ListHeaderComponent, refetch, loading}: IFeedGridView) => {
   return (
     <FlatList
     data = {data}
@@ -17,6 +19,8 @@ const FeedeGridView = ({data, ListHeaderComponent}: IFeedGridView) => {
     showsVerticalScrollIndicator={false}
     ListHeaderComponent={ListHeaderComponent}
     style={{marginHorizontal: -1}}
+    onRefresh={()=>refetch()}
+    refreshing={loading}
   />
   )
 }

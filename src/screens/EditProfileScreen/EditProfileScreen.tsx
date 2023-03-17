@@ -1,11 +1,18 @@
-import { View, Text, Image, StyleSheet, TextInput } from 'react-native'
-import React from 'react'
-import user from '../../assets/data/user.json'
+import { View, Text, Image, StyleSheet, TextInput, ActivityIndicator, Alert } from 'react-native'
+import {useEffect} from 'react'
 import colors from '../../theme/colors'
-import { User } from '../../API'
+import { DeleteUserMutation, DeleteUserMutationVariables, GetUserQuery, GetUserQueryVariables, UpdateUserMutation, UpdateUserMutationVariables, User } from '../../API'
 import {useForm, Controller, Control} from 'react-hook-form'
 import {Asset, launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import {useState} from 'react'
+import { getUser, updateUser, deleteUser } from './queries'
+import { useMutation, useQuery } from '@apollo/client'
+import { useAuthContext } from '../../contexts/AuthContext'
+import ApiErrorMessage from '../../components/ApiErrorMessage'
+import { DEFAULT_USER_IMAGE } from '../../config'
+import { useNavigation } from '@react-navigation/native'
+import {Auth} from 'aws-amplify'
+
 const URL_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 type IEditableUserField = 'name' | 'username' | 'website' | 'bio';
 type IEditableUser = Pick<User, IEditableUserField>
@@ -43,27 +50,62 @@ const CustomInput = ({control, label, name, multiline, rules={}}: ICustomInput) 
       </View>
     )}}
   />
-
-  
 )
 
 const EditProfileScreen = () => {
   const [selectedPhoto, setSelectedPhoto] = useState<null | Asset>(null)
-  const {
-    control, 
-    handleSubmit, 
-    formState: {errors}
-  } = useForm<IEditableUser>({
-    defaultValues: {
-      name: user.name,
-      username: user.username,
-      website: user.website,
-      bio: user.bio,
-    }
-  });
+  const { control, handleSubmit, setValue } = useForm<IEditableUser>();
+  const navigation = useNavigation()
+  const {userId, user: authUser} = useAuthContext()
 
-  const onSubmit = (data: IEditableUser) => {
-    console.log('Submit', data)
+  // Get the user
+  const {data, loading, error} = useQuery<GetUserQuery, GetUserQueryVariables>(getUser, {variables: {id: userId}})
+  const user = data?.getUser;
+
+  // Update the user
+  const [ doUpdateUser, {loading: updateLoading, error: updateError}] = 
+    useMutation<UpdateUserMutation, UpdateUserMutationVariables>(updateUser)
+
+  // Delete the user
+  const [ doDelete, {loading: deleteLoading, error: deleteError}] = useMutation<DeleteUserMutation, DeleteUserMutationVariables>(deleteUser);
+
+
+
+  useEffect(() => {
+    if(user) {
+      setValue('name', user.name);
+      setValue('username', user.username);
+      setValue('website', user.website);
+      setValue('bio', user.bio);
+    }
+  }, [user, setValue])
+
+  const onSubmit = async (formData: IEditableUser) => {
+    await doUpdateUser({variables: {
+      input: {id: userId, ...formData, _version: user?._version }
+    }})
+    navigation.goBack();
+  }
+
+  const confirmDelete = () => {
+    Alert.alert("Are you sure?", 'Deleting your profile is permanent', [
+      {text: 'Cancel', style: 'cancel'},
+      {text: 'Yes, delete', style: 'destructive', onPress: startDeleting},
+    ])
+  }
+
+  const startDeleting = async () => {
+    if (!user) {
+      return;
+    }
+    // Delete from DB
+    await doDelete({variables: {input: {id: userId, _version: user?._version}}})
+
+    // Delete from Cognito
+    authUser?.deleteUser((err) => {
+      if(err) { console.log('Error deleting user', err) } 
+      Auth.signOut();
+    })
   }
 
   const onChangePhoto = () => {
@@ -75,9 +117,12 @@ const EditProfileScreen = () => {
       }
     })}
 
+  if(loading || updateLoading || deleteLoading ){ return (<ActivityIndicator/>) }
+  if(error || updateError || deleteError){ return <ApiErrorMessage title='Error fetching or updating user' message={error?.message || updateError?.message || deleteError?.message}/> }
+
   return (
     <View style={styles.page}>
-      <Image source={{uri: selectedPhoto?.uri || user.image}} style={styles.avatar} />
+      <Image source={{uri: selectedPhoto?.uri || user?.image || DEFAULT_USER_IMAGE }} style={styles.avatar} />
       <Text style={styles.textButton} onPress={onChangePhoto}> Change profile photo </Text>
 
       <CustomInput 
@@ -102,7 +147,6 @@ const EditProfileScreen = () => {
         control={control} 
         label="Website" 
         rules={{
-          required: "Website is required",
           pattern: {
             value: URL_REGEX,
             message: "Website should be a valid URL"
@@ -123,7 +167,9 @@ const EditProfileScreen = () => {
           }}
       />
 
-      <Text style={styles.textButton} onPress={handleSubmit(onSubmit)}>Submit</Text>
+      <Text style={styles.textButton} onPress={handleSubmit(onSubmit)}>{updateLoading ? 'Submitting...' : 'Submit'}</Text>
+      
+      <Text style={styles.textButtonDanger} onPress={confirmDelete}>{deleteLoading ? 'Deleting...' : 'DELETE USER'}</Text>
     </View>
   )
 }
@@ -149,6 +195,12 @@ const styles = StyleSheet.create({
       fontSize: 16,
       margin: 10,
   },
+  textButtonDanger: {
+    color: colors.error,
+    fontWeight: 'bold',
+    fontSize: 16,
+    margin: 10,
+},
   inputContainer: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -163,6 +215,7 @@ const styles = StyleSheet.create({
       fontSize: 16,
       borderColor: colors.lightgrey,
       borderBottomWidth: 1,
+      minHeight: 50,
   }
 })
 export default EditProfileScreen;
