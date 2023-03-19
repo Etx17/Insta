@@ -1,14 +1,14 @@
-type Like @model @auth(rules: [{allow: public}]) {
+type Comment @model @auth(rules: [{allow: public}]) {
   id: ID!
+  comment: String!
   userID: ID! @index(name: "byUser")
   postID: ID! @index(name: "byPost")
   User: User @belongsTo(fields: ["userID"])
   Post: Post @belongsTo(fields: ["postID"])
 }
 
-type Comment @model @auth(rules: [{allow: public}]) {
+type Like @model @auth(rules: [{allow: public}]) {
   id: ID!
-  comment: String!
   userID: ID! @index(name: "byUser")
   postID: ID! @index(name: "byPost")
   User: User @belongsTo(fields: ["userID"])
@@ -25,8 +25,8 @@ type Post @model @auth(rules: [{allow: public}]) {
   nofLikes: Int!
   userID: ID! @index(name: "byUser")
   User: User @belongsTo(fields: ["userID"])
-  Likes: [Like] @hasMany(indexName: "byPost", fields: ["id"])
   Comments: [Comment] @hasMany(indexName: "byPost", fields: ["id"])
+  Likes: [Like] @hasMany(indexName: "byPost", fields: ["id"])
 }
 
 type User @model @auth(rules: [{allow: public}]) {
@@ -39,9 +39,9 @@ type User @model @auth(rules: [{allow: public}]) {
   nofFollowers: Int!
   nofFollowings: Int!
   image: String
-  Posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
+  username: String
   Comments: [Comment] @hasMany(indexName: "byUser", fields: ["id"])
   Likes: [Like] @hasMany(indexName: "byUser", fields: ["id"])
-  username: String
+  Posts: [Post] @hasMany(indexName: "byUser", fields: ["id"])
 }
  

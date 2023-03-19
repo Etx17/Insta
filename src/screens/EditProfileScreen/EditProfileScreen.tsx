@@ -70,7 +70,6 @@ const EditProfileScreen = () => {
   const [ doDelete, {loading: deleteLoading, error: deleteError}] = useMutation<DeleteUserMutation, DeleteUserMutationVariables>(deleteUser);
 
 
-
   useEffect(() => {
     if(user) {
       setValue('name', user.name);

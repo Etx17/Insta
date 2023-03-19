@@ -6,40 +6,6 @@ import { LazyLoading, LazyLoadingDisabled, AsyncItem, AsyncCollection } from "@a
 
 
 
-type EagerLike = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Like, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly userID: string;
-  readonly postID: string;
-  readonly User?: User | null;
-  readonly Post?: Post | null;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-type LazyLike = {
-  readonly [__modelMeta__]: {
-    identifier: ManagedIdentifier<Like, 'id'>;
-    readOnlyFields: 'createdAt' | 'updatedAt';
-  };
-  readonly id: string;
-  readonly userID: string;
-  readonly postID: string;
-  readonly User: AsyncItem<User | undefined>;
-  readonly Post: AsyncItem<Post | undefined>;
-  readonly createdAt?: string | null;
-  readonly updatedAt?: string | null;
-}
-
-export declare type Like = LazyLoading extends LazyLoadingDisabled ? EagerLike : LazyLike
-
-export declare const Like: (new (init: ModelInit<Like>) => Like) & {
-  copyOf(source: Like, mutator: (draft: MutableModel<Like>) => MutableModel<Like> | void): Like;
-}
-
 type EagerComment = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Comment, 'id'>;
@@ -76,6 +42,40 @@ export declare const Comment: (new (init: ModelInit<Comment>) => Comment) & {
   copyOf(source: Comment, mutator: (draft: MutableModel<Comment>) => MutableModel<Comment> | void): Comment;
 }
 
+type EagerLike = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Like, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userID: string;
+  readonly postID: string;
+  readonly User?: User | null;
+  readonly Post?: Post | null;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+type LazyLike = {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<Like, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly userID: string;
+  readonly postID: string;
+  readonly User: AsyncItem<User | undefined>;
+  readonly Post: AsyncItem<Post | undefined>;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+}
+
+export declare type Like = LazyLoading extends LazyLoadingDisabled ? EagerLike : LazyLike
+
+export declare const Like: (new (init: ModelInit<Like>) => Like) & {
+  copyOf(source: Like, mutator: (draft: MutableModel<Like>) => MutableModel<Like> | void): Like;
+}
+
 type EagerPost = {
   readonly [__modelMeta__]: {
     identifier: ManagedIdentifier<Post, 'id'>;
@@ -90,8 +90,8 @@ type EagerPost = {
   readonly nofLikes: number;
   readonly userID: string;
   readonly User?: User | null;
-  readonly Likes?: (Like | null)[] | null;
   readonly Comments?: (Comment | null)[] | null;
+  readonly Likes?: (Like | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -110,8 +110,8 @@ type LazyPost = {
   readonly nofLikes: number;
   readonly userID: string;
   readonly User: AsyncItem<User | undefined>;
-  readonly Likes: AsyncCollection<Like>;
   readonly Comments: AsyncCollection<Comment>;
+  readonly Likes: AsyncCollection<Like>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -136,10 +136,10 @@ type EagerUser = {
   readonly nofFollowers: number;
   readonly nofFollowings: number;
   readonly image?: string | null;
-  readonly Posts?: (Post | null)[] | null;
+  readonly username?: string | null;
   readonly Comments?: (Comment | null)[] | null;
   readonly Likes?: (Like | null)[] | null;
-  readonly username?: string | null;
+  readonly Posts?: (Post | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }
@@ -158,10 +158,10 @@ type LazyUser = {
   readonly nofFollowers: number;
   readonly nofFollowings: number;
   readonly image?: string | null;
-  readonly Posts: AsyncCollection<Post>;
+  readonly username?: string | null;
   readonly Comments: AsyncCollection<Comment>;
   readonly Likes: AsyncCollection<Like>;
-  readonly username?: string | null;
+  readonly Posts: AsyncCollection<Post>;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
 }

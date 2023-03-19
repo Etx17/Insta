@@ -17,7 +17,7 @@ const userExists = async id => {
     const response = await docClient.get(params).promise()
     return !!response?.Item; 
   } catch(e){
-    console.log(e)
+    console.log(e, 'error in userExists')
     return false;
   }
 };
@@ -53,12 +53,12 @@ exports.handler = async (event, context) => {
     console.log('no user data available');
     return
   }
-
-  const {sub, name, email} = event.request.userAttributes;
+  console.log(event.request.userAttributes, 'this is Event.request.userAttributes');
+  const {sub, email, name} = event.request.userAttributes;
 
   const newUser = { 
     id: sub, 
-    name, 
+    name,
     email,
     nofPosts: 0,
     nofFollowers: 0,

@@ -2,264 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const createLike = /* GraphQL */ `
-  mutation CreateLike(
-    $input: CreateLikeInput!
-    $condition: ModelLikeConditionInput
-  ) {
-    createLike(input: $input, condition: $condition) {
-      id
-      userID
-      postID
-      User {
-        id
-        name
-        email
-        bio
-        website
-        nofPosts
-        nofFollowers
-        nofFollowings
-        image
-        Posts {
-          nextToken
-          startedAt
-        }
-        Comments {
-          nextToken
-          startedAt
-        }
-        Likes {
-          nextToken
-          startedAt
-        }
-        username
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      Post {
-        id
-        description
-        image
-        images
-        video
-        nofComments
-        nofLikes
-        userID
-        User {
-          id
-          name
-          email
-          bio
-          website
-          nofPosts
-          nofFollowers
-          nofFollowings
-          image
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Likes {
-          nextToken
-          startedAt
-        }
-        Comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const updateLike = /* GraphQL */ `
-  mutation UpdateLike(
-    $input: UpdateLikeInput!
-    $condition: ModelLikeConditionInput
-  ) {
-    updateLike(input: $input, condition: $condition) {
-      id
-      userID
-      postID
-      User {
-        id
-        name
-        email
-        bio
-        website
-        nofPosts
-        nofFollowers
-        nofFollowings
-        image
-        Posts {
-          nextToken
-          startedAt
-        }
-        Comments {
-          nextToken
-          startedAt
-        }
-        Likes {
-          nextToken
-          startedAt
-        }
-        username
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      Post {
-        id
-        description
-        image
-        images
-        video
-        nofComments
-        nofLikes
-        userID
-        User {
-          id
-          name
-          email
-          bio
-          website
-          nofPosts
-          nofFollowers
-          nofFollowings
-          image
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Likes {
-          nextToken
-          startedAt
-        }
-        Comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const deleteLike = /* GraphQL */ `
-  mutation DeleteLike(
-    $input: DeleteLikeInput!
-    $condition: ModelLikeConditionInput
-  ) {
-    deleteLike(input: $input, condition: $condition) {
-      id
-      userID
-      postID
-      User {
-        id
-        name
-        email
-        bio
-        website
-        nofPosts
-        nofFollowers
-        nofFollowings
-        image
-        Posts {
-          nextToken
-          startedAt
-        }
-        Comments {
-          nextToken
-          startedAt
-        }
-        Likes {
-          nextToken
-          startedAt
-        }
-        username
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      Post {
-        id
-        description
-        image
-        images
-        video
-        nofComments
-        nofLikes
-        userID
-        User {
-          id
-          name
-          email
-          bio
-          website
-          nofPosts
-          nofFollowers
-          nofFollowings
-          image
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Likes {
-          nextToken
-          startedAt
-        }
-        Comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
 export const createComment = /* GraphQL */ `
   mutation CreateComment(
     $input: CreateCommentInput!
@@ -280,10 +22,7 @@ export const createComment = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -292,7 +31,10 @@ export const createComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -304,7 +46,7 @@ export const createComment = /* GraphQL */ `
         description
         image
         images
-        video
+        vide
         nofComments
         nofLikes
         userID
@@ -325,11 +67,11 @@ export const createComment = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        Likes {
+        Comments {
           nextToken
           startedAt
         }
-        Comments {
+        Likes {
           nextToken
           startedAt
         }
@@ -367,10 +109,7 @@ export const updateComment = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -379,7 +118,10 @@ export const updateComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -391,7 +133,7 @@ export const updateComment = /* GraphQL */ `
         description
         image
         images
-        video
+        vide
         nofComments
         nofLikes
         userID
@@ -412,11 +154,11 @@ export const updateComment = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        Likes {
+        Comments {
           nextToken
           startedAt
         }
-        Comments {
+        Likes {
           nextToken
           startedAt
         }
@@ -454,10 +196,7 @@ export const deleteComment = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -466,7 +205,10 @@ export const deleteComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -478,7 +220,7 @@ export const deleteComment = /* GraphQL */ `
         description
         image
         images
-        video
+        vide
         nofComments
         nofLikes
         userID
@@ -499,11 +241,269 @@ export const deleteComment = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
+        Comments {
+          nextToken
+          startedAt
+        }
         Likes {
           nextToken
           startedAt
         }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const createLike = /* GraphQL */ `
+  mutation CreateLike(
+    $input: CreateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    createLike(input: $input, condition: $condition) {
+      id
+      userID
+      postID
+      User {
+        id
+        name
+        email
+        bio
+        website
+        nofPosts
+        nofFollowers
+        nofFollowings
+        image
+        username
         Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Posts {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Post {
+        id
+        description
+        image
+        images
+        vide
+        nofComments
+        nofLikes
+        userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const updateLike = /* GraphQL */ `
+  mutation UpdateLike(
+    $input: UpdateLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    updateLike(input: $input, condition: $condition) {
+      id
+      userID
+      postID
+      User {
+        id
+        name
+        email
+        bio
+        website
+        nofPosts
+        nofFollowers
+        nofFollowings
+        image
+        username
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Posts {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Post {
+        id
+        description
+        image
+        images
+        vide
+        nofComments
+        nofLikes
+        userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const deleteLike = /* GraphQL */ `
+  mutation DeleteLike(
+    $input: DeleteLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    deleteLike(input: $input, condition: $condition) {
+      id
+      userID
+      postID
+      User {
+        id
+        name
+        email
+        bio
+        website
+        nofPosts
+        nofFollowers
+        nofFollowings
+        image
+        username
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Posts {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Post {
+        id
+        description
+        image
+        images
+        vide
+        nofComments
+        nofLikes
+        userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
           nextToken
           startedAt
         }
@@ -531,7 +531,7 @@ export const createPost = /* GraphQL */ `
       description
       image
       images
-      video
+      vide
       nofComments
       nofLikes
       userID
@@ -545,10 +545,7 @@ export const createPost = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -557,16 +554,20 @@ export const createPost = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      Likes {
+      Comments {
         items {
           id
+          comment
           userID
           postID
           createdAt
@@ -578,10 +579,9 @@ export const createPost = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Comments {
+      Likes {
         items {
           id
-          comment
           userID
           postID
           createdAt
@@ -611,7 +611,7 @@ export const updatePost = /* GraphQL */ `
       description
       image
       images
-      video
+      vide
       nofComments
       nofLikes
       userID
@@ -625,10 +625,7 @@ export const updatePost = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -637,16 +634,20 @@ export const updatePost = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      Likes {
+      Comments {
         items {
           id
+          comment
           userID
           postID
           createdAt
@@ -658,10 +659,9 @@ export const updatePost = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Comments {
+      Likes {
         items {
           id
-          comment
           userID
           postID
           createdAt
@@ -691,7 +691,7 @@ export const deletePost = /* GraphQL */ `
       description
       image
       images
-      video
+      vide
       nofComments
       nofLikes
       userID
@@ -705,10 +705,7 @@ export const deletePost = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -717,16 +714,20 @@ export const deletePost = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      Likes {
+      Comments {
         items {
           id
+          comment
           userID
           postID
           createdAt
@@ -738,10 +739,9 @@ export const deletePost = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Comments {
+      Likes {
         items {
           id
-          comment
           userID
           postID
           createdAt
@@ -776,25 +776,7 @@ export const createUser = /* GraphQL */ `
       nofFollowers
       nofFollowings
       image
-      Posts {
-        items {
-          id
-          description
-          image
-          images
-          video
-          nofComments
-          nofLikes
-          userID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
+      username
       Comments {
         items {
           id
@@ -824,7 +806,25 @@ export const createUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      username
+      Posts {
+        items {
+          id
+          description
+          image
+          images
+          vide
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -848,25 +848,7 @@ export const updateUser = /* GraphQL */ `
       nofFollowers
       nofFollowings
       image
-      Posts {
-        items {
-          id
-          description
-          image
-          images
-          video
-          nofComments
-          nofLikes
-          userID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
+      username
       Comments {
         items {
           id
@@ -896,7 +878,25 @@ export const updateUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      username
+      Posts {
+        items {
+          id
+          description
+          image
+          images
+          vide
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -920,25 +920,7 @@ export const deleteUser = /* GraphQL */ `
       nofFollowers
       nofFollowings
       image
-      Posts {
-        items {
-          id
-          description
-          image
-          images
-          video
-          nofComments
-          nofLikes
-          userID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
+      username
       Comments {
         items {
           id
@@ -968,7 +950,25 @@ export const deleteUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      username
+      Posts {
+        items {
+          id
+          description
+          image
+          images
+          vide
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version

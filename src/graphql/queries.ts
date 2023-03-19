@@ -2,327 +2,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const getLike = /* GraphQL */ `
-  query GetLike($id: ID!) {
-    getLike(id: $id) {
-      id
-      userID
-      postID
-      User {
-        id
-        name
-        email
-        bio
-        website
-        nofPosts
-        nofFollowers
-        nofFollowings
-        image
-        Posts {
-          nextToken
-          startedAt
-        }
-        Comments {
-          nextToken
-          startedAt
-        }
-        Likes {
-          nextToken
-          startedAt
-        }
-        username
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      Post {
-        id
-        description
-        image
-        images
-        video
-        nofComments
-        nofLikes
-        userID
-        User {
-          id
-          name
-          email
-          bio
-          website
-          nofPosts
-          nofFollowers
-          nofFollowings
-          image
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Likes {
-          nextToken
-          startedAt
-        }
-        Comments {
-          nextToken
-          startedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      createdAt
-      updatedAt
-      _version
-      _deleted
-      _lastChangedAt
-    }
-  }
-`;
-export const listLikes = /* GraphQL */ `
-  query ListLikes(
-    $filter: ModelLikeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    listLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
-      items {
-        id
-        userID
-        postID
-        User {
-          id
-          name
-          email
-          bio
-          website
-          nofPosts
-          nofFollowers
-          nofFollowings
-          image
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Post {
-          id
-          description
-          image
-          images
-          video
-          nofComments
-          nofLikes
-          userID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const syncLikes = /* GraphQL */ `
-  query SyncLikes(
-    $filter: ModelLikeFilterInput
-    $limit: Int
-    $nextToken: String
-    $lastSync: AWSTimestamp
-  ) {
-    syncLikes(
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      lastSync: $lastSync
-    ) {
-      items {
-        id
-        userID
-        postID
-        User {
-          id
-          name
-          email
-          bio
-          website
-          nofPosts
-          nofFollowers
-          nofFollowings
-          image
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Post {
-          id
-          description
-          image
-          images
-          video
-          nofComments
-          nofLikes
-          userID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const likesByUserID = /* GraphQL */ `
-  query LikesByUserID(
-    $userID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelLikeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    likesByUserID(
-      userID: $userID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        userID
-        postID
-        User {
-          id
-          name
-          email
-          bio
-          website
-          nofPosts
-          nofFollowers
-          nofFollowings
-          image
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Post {
-          id
-          description
-          image
-          images
-          video
-          nofComments
-          nofLikes
-          userID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
-export const likesByPostID = /* GraphQL */ `
-  query LikesByPostID(
-    $postID: ID!
-    $sortDirection: ModelSortDirection
-    $filter: ModelLikeFilterInput
-    $limit: Int
-    $nextToken: String
-  ) {
-    likesByPostID(
-      postID: $postID
-      sortDirection: $sortDirection
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-    ) {
-      items {
-        id
-        userID
-        postID
-        User {
-          id
-          name
-          email
-          bio
-          website
-          nofPosts
-          nofFollowers
-          nofFollowings
-          image
-          username
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        Post {
-          id
-          description
-          image
-          images
-          video
-          nofComments
-          nofLikes
-          userID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        createdAt
-        updatedAt
-        _version
-        _deleted
-        _lastChangedAt
-      }
-      nextToken
-      startedAt
-    }
-  }
-`;
 export const getComment = /* GraphQL */ `
   query GetComment($id: ID!) {
     getComment(id: $id) {
@@ -340,10 +19,7 @@ export const getComment = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -352,7 +28,10 @@ export const getComment = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -364,7 +43,7 @@ export const getComment = /* GraphQL */ `
         description
         image
         images
-        video
+        vide
         nofComments
         nofLikes
         userID
@@ -385,11 +64,11 @@ export const getComment = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        Likes {
+        Comments {
           nextToken
           startedAt
         }
-        Comments {
+        Likes {
           nextToken
           startedAt
         }
@@ -441,7 +120,7 @@ export const listComments = /* GraphQL */ `
           description
           image
           images
-          video
+          vide
           nofComments
           nofLikes
           userID
@@ -502,7 +181,7 @@ export const syncComments = /* GraphQL */ `
           description
           image
           images
-          video
+          vide
           nofComments
           nofLikes
           userID
@@ -565,7 +244,7 @@ export const commentsByUserID = /* GraphQL */ `
           description
           image
           images
-          video
+          vide
           nofComments
           nofLikes
           userID
@@ -628,7 +307,328 @@ export const commentsByPostID = /* GraphQL */ `
           description
           image
           images
-          video
+          vide
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const getLike = /* GraphQL */ `
+  query GetLike($id: ID!) {
+    getLike(id: $id) {
+      id
+      userID
+      postID
+      User {
+        id
+        name
+        email
+        bio
+        website
+        nofPosts
+        nofFollowers
+        nofFollowings
+        image
+        username
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        Posts {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      Post {
+        id
+        description
+        image
+        images
+        vide
+        nofComments
+        nofLikes
+        userID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Comments {
+          nextToken
+          startedAt
+        }
+        Likes {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const listLikes = /* GraphQL */ `
+  query ListLikes(
+    $filter: ModelLikeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLikes(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        userID
+        postID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          description
+          image
+          images
+          vide
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const syncLikes = /* GraphQL */ `
+  query SyncLikes(
+    $filter: ModelLikeFilterInput
+    $limit: Int
+    $nextToken: String
+    $lastSync: AWSTimestamp
+  ) {
+    syncLikes(
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+      lastSync: $lastSync
+    ) {
+      items {
+        id
+        userID
+        postID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          description
+          image
+          images
+          vide
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const likesByUserID = /* GraphQL */ `
+  query LikesByUserID(
+    $userID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelLikeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    likesByUserID(
+      userID: $userID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        postID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          description
+          image
+          images
+          vide
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+`;
+export const likesByPostID = /* GraphQL */ `
+  query LikesByPostID(
+    $postID: ID!
+    $sortDirection: ModelSortDirection
+    $filter: ModelLikeFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    likesByPostID(
+      postID: $postID
+      sortDirection: $sortDirection
+      filter: $filter
+      limit: $limit
+      nextToken: $nextToken
+    ) {
+      items {
+        id
+        userID
+        postID
+        User {
+          id
+          name
+          email
+          bio
+          website
+          nofPosts
+          nofFollowers
+          nofFollowings
+          image
+          username
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        Post {
+          id
+          description
+          image
+          images
+          vide
           nofComments
           nofLikes
           userID
@@ -656,7 +656,7 @@ export const getPost = /* GraphQL */ `
       description
       image
       images
-      video
+      vide
       nofComments
       nofLikes
       userID
@@ -670,10 +670,7 @@ export const getPost = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -682,16 +679,20 @@ export const getPost = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
         _deleted
         _lastChangedAt
       }
-      Likes {
+      Comments {
         items {
           id
+          comment
           userID
           postID
           createdAt
@@ -703,10 +704,9 @@ export const getPost = /* GraphQL */ `
         nextToken
         startedAt
       }
-      Comments {
+      Likes {
         items {
           id
-          comment
           userID
           postID
           createdAt
@@ -738,7 +738,7 @@ export const listPosts = /* GraphQL */ `
         description
         image
         images
-        video
+        vide
         nofComments
         nofLikes
         userID
@@ -759,11 +759,11 @@ export const listPosts = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        Likes {
+        Comments {
           nextToken
           startedAt
         }
-        Comments {
+        Likes {
           nextToken
           startedAt
         }
@@ -796,7 +796,7 @@ export const syncPosts = /* GraphQL */ `
         description
         image
         images
-        video
+        vide
         nofComments
         nofLikes
         userID
@@ -817,11 +817,11 @@ export const syncPosts = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        Likes {
+        Comments {
           nextToken
           startedAt
         }
-        Comments {
+        Likes {
           nextToken
           startedAt
         }
@@ -856,7 +856,7 @@ export const postsByUserID = /* GraphQL */ `
         description
         image
         images
-        video
+        vide
         nofComments
         nofLikes
         userID
@@ -877,11 +877,11 @@ export const postsByUserID = /* GraphQL */ `
           _deleted
           _lastChangedAt
         }
-        Likes {
+        Comments {
           nextToken
           startedAt
         }
-        Comments {
+        Likes {
           nextToken
           startedAt
         }
@@ -908,25 +908,7 @@ export const getUser = /* GraphQL */ `
       nofFollowers
       nofFollowings
       image
-      Posts {
-        items {
-          id
-          description
-          image
-          images
-          video
-          nofComments
-          nofLikes
-          userID
-          createdAt
-          updatedAt
-          _version
-          _deleted
-          _lastChangedAt
-        }
-        nextToken
-        startedAt
-      }
+      username
       Comments {
         items {
           id
@@ -956,7 +938,25 @@ export const getUser = /* GraphQL */ `
         nextToken
         startedAt
       }
-      username
+      Posts {
+        items {
+          id
+          description
+          image
+          images
+          vide
+          nofComments
+          nofLikes
+          userID
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
       createdAt
       updatedAt
       _version
@@ -982,10 +982,7 @@ export const listUsers = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -994,7 +991,10 @@ export const listUsers = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version
@@ -1029,10 +1029,7 @@ export const syncUsers = /* GraphQL */ `
         nofFollowers
         nofFollowings
         image
-        Posts {
-          nextToken
-          startedAt
-        }
+        username
         Comments {
           nextToken
           startedAt
@@ -1041,7 +1038,10 @@ export const syncUsers = /* GraphQL */ `
           nextToken
           startedAt
         }
-        username
+        Posts {
+          nextToken
+          startedAt
+        }
         createdAt
         updatedAt
         _version

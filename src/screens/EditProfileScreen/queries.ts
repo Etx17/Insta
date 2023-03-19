@@ -6,6 +6,7 @@ export const getUser = gql`
       name
       email
       bio
+      username
       website
       nofPosts
       nofFollowers
