@@ -12,7 +12,7 @@ const HomeScreen = () => {
   
   const [activePostId, setActivePostId] = useState<string | null>(null);
 
-  const {data, loading, error} = useQuery<
+  const {data, loading, error, refetch} = useQuery<
     ListPostsQuery, 
     ListPostsQueryVariables 
   >(listPosts);     
@@ -44,6 +44,8 @@ const HomeScreen = () => {
         showsVerticalScrollIndicator={false}
         viewabilityConfig={viewabilityConfig}
         onViewableItemsChanged={onViewableItemsChanged.current}
+        onRefresh={() => refetch()}
+        refreshing={loading}
       />
 
   )

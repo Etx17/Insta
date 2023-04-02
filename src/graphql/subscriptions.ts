@@ -43,7 +43,6 @@ export const onCreateComment = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -127,7 +126,6 @@ export const onUpdateComment = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -211,7 +209,6 @@ export const onDeleteComment = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -294,7 +291,6 @@ export const onCreateLike = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -377,7 +373,6 @@ export const onUpdateLike = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -460,7 +455,6 @@ export const onDeleteLike = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -510,7 +504,6 @@ export const onCreatePost = /* GraphQL */ `
       description
       image
       images
-      vide
       nofComments
       nofLikes
       userID
@@ -587,7 +580,6 @@ export const onUpdatePost = /* GraphQL */ `
       description
       image
       images
-      vide
       nofComments
       nofLikes
       userID
@@ -664,7 +656,6 @@ export const onDeletePost = /* GraphQL */ `
       description
       image
       images
-      vide
       nofComments
       nofLikes
       userID
@@ -782,7 +773,6 @@ export const onCreateUser = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -851,7 +841,6 @@ export const onUpdateUser = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -920,7 +909,6 @@ export const onDeleteUser = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID

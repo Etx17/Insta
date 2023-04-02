@@ -19,8 +19,31 @@ export type BottomTabNavigatorParamsList = {
 export type SearchTabTabNavigatorParamsList = {
     Users: undefined
     Posts: undefined
-    
 };
+
+export type UploadStackNavigationParamsList = {
+  Camera: undefined
+  Create: {
+    image?: string;
+    images?: string[];
+    video?: string;
+  }
+};
+
+export type CreateRouteProp = RouteProp<
+  UploadStackNavigationParamsList,
+ 'Create'
+ >;
+
+ export type CreateNavigationProp = RouteProp<
+  UploadStackNavigationParamsList,
+ 'Create'
+ >;
+
+export type CameraNavigationProp = NativeStackNavigationProp<
+    UploadStackNavigationParamsList,
+    'Camera'
+>
 
 export type MyProfileNavigationProp = BottomTabNavigationProp<
     BottomTabNavigatorParamsList,

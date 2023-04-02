@@ -146,7 +146,6 @@ export type Post = {
   description?: string | null,
   image?: string | null,
   images?: Array< string > | null,
-  vide?: string | null,
   nofComments: number,
   nofLikes: number,
   userID: string,
@@ -212,7 +211,6 @@ export type CreatePostInput = {
   description?: string | null,
   image?: string | null,
   images?: Array< string > | null,
-  vide?: string | null,
   nofComments: number,
   nofLikes: number,
   userID: string,
@@ -223,7 +221,6 @@ export type ModelPostConditionInput = {
   description?: ModelStringInput | null,
   image?: ModelStringInput | null,
   images?: ModelStringInput | null,
-  vide?: ModelStringInput | null,
   nofComments?: ModelIntInput | null,
   nofLikes?: ModelIntInput | null,
   userID?: ModelIDInput | null,
@@ -249,7 +246,6 @@ export type UpdatePostInput = {
   description?: string | null,
   image?: string | null,
   images?: Array< string > | null,
-  vide?: string | null,
   nofComments?: number | null,
   nofLikes?: number | null,
   userID?: string | null,
@@ -339,7 +335,6 @@ export type ModelPostFilterInput = {
   description?: ModelStringInput | null,
   image?: ModelStringInput | null,
   images?: ModelStringInput | null,
-  vide?: ModelStringInput | null,
   nofComments?: ModelIntInput | null,
   nofLikes?: ModelIntInput | null,
   userID?: ModelIDInput | null,
@@ -423,7 +418,6 @@ export type ModelSubscriptionPostFilterInput = {
   description?: ModelSubscriptionStringInput | null,
   image?: ModelSubscriptionStringInput | null,
   images?: ModelSubscriptionStringInput | null,
-  vide?: ModelSubscriptionStringInput | null,
   nofComments?: ModelSubscriptionIntInput | null,
   nofLikes?: ModelSubscriptionIntInput | null,
   userID?: ModelSubscriptionIDInput | null,
@@ -509,7 +503,7 @@ export type CreateCommentMutation = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -606,7 +600,7 @@ export type UpdateCommentMutation = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -703,7 +697,7 @@ export type DeleteCommentMutation = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -799,7 +793,7 @@ export type CreateLikeMutation = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -895,7 +889,7 @@ export type UpdateLikeMutation = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -991,7 +985,7 @@ export type DeleteLikeMutation = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -1049,7 +1043,7 @@ export type CreatePostMutation = {
     description?: string | null,
     image?: string | null,
     images?: Array< string > | null,
-    vide?: string | null,
+
     nofComments: number,
     nofLikes: number,
     userID: string,
@@ -1139,7 +1133,7 @@ export type UpdatePostMutation = {
     description?: string | null,
     image?: string | null,
     images?: Array< string > | null,
-    vide?: string | null,
+
     nofComments: number,
     nofLikes: number,
     userID: string,
@@ -1229,7 +1223,7 @@ export type DeletePostMutation = {
     description?: string | null,
     image?: string | null,
     images?: Array< string > | null,
-    vide?: string | null,
+
     nofComments: number,
     nofLikes: number,
     userID: string,
@@ -1366,7 +1360,7 @@ export type CreateUserMutation = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -1446,7 +1440,7 @@ export type UpdateUserMutation = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -1526,7 +1520,7 @@ export type DeleteUserMutation = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -1597,7 +1591,7 @@ export type GetCommentQuery = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -1682,7 +1676,7 @@ export type ListCommentsQuery = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -1743,7 +1737,7 @@ export type SyncCommentsQuery = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -1805,7 +1799,7 @@ export type CommentsByUserIDQuery = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -1867,7 +1861,7 @@ export type CommentsByPostIDQuery = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -1937,7 +1931,7 @@ export type GetLikeQuery = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -2021,7 +2015,7 @@ export type ListLikesQuery = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -2081,7 +2075,7 @@ export type SyncLikesQuery = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -2142,7 +2136,7 @@ export type LikesByUserIDQuery = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -2203,7 +2197,7 @@ export type LikesByPostIDQuery = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -2235,7 +2229,7 @@ export type GetPostQuery = {
     description?: string | null,
     image?: string | null,
     images?: Array< string > | null,
-    vide?: string | null,
+
     nofComments: number,
     nofLikes: number,
     userID: string,
@@ -2328,7 +2322,7 @@ export type ListPostsQuery = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -2387,7 +2381,7 @@ export type SyncPostsQuery = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -2447,7 +2441,7 @@ export type PostsByUserIDQuery = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -2548,7 +2542,7 @@ export type GetUserQuery = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -2714,7 +2708,7 @@ export type OnCreateCommentSubscription = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -2810,7 +2804,7 @@ export type OnUpdateCommentSubscription = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -2906,7 +2900,7 @@ export type OnDeleteCommentSubscription = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -3001,7 +2995,7 @@ export type OnCreateLikeSubscription = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -3096,7 +3090,7 @@ export type OnUpdateLikeSubscription = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -3191,7 +3185,7 @@ export type OnDeleteLikeSubscription = {
       description?: string | null,
       image?: string | null,
       images?: Array< string > | null,
-      vide?: string | null,
+  
       nofComments: number,
       nofLikes: number,
       userID: string,
@@ -3248,7 +3242,7 @@ export type OnCreatePostSubscription = {
     description?: string | null,
     image?: string | null,
     images?: Array< string > | null,
-    vide?: string | null,
+
     nofComments: number,
     nofLikes: number,
     userID: string,
@@ -3337,7 +3331,7 @@ export type OnUpdatePostSubscription = {
     description?: string | null,
     image?: string | null,
     images?: Array< string > | null,
-    vide?: string | null,
+
     nofComments: number,
     nofLikes: number,
     userID: string,
@@ -3426,7 +3420,7 @@ export type OnDeletePostSubscription = {
     description?: string | null,
     image?: string | null,
     images?: Array< string > | null,
-    vide?: string | null,
+
     nofComments: number,
     nofLikes: number,
     userID: string,
@@ -3562,7 +3556,7 @@ export type OnCreateUserSubscription = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -3641,7 +3635,7 @@ export type OnUpdateUserSubscription = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,
@@ -3720,7 +3714,7 @@ export type OnDeleteUserSubscription = {
         description?: string | null,
         image?: string | null,
         images?: Array< string > | null,
-        vide?: string | null,
+    
         nofComments: number,
         nofLikes: number,
         userID: string,

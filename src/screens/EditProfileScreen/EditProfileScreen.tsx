@@ -11,7 +11,7 @@ import { useAuthContext } from '../../contexts/AuthContext'
 import ApiErrorMessage from '../../components/ApiErrorMessage'
 import { DEFAULT_USER_IMAGE } from '../../config'
 import { useNavigation } from '@react-navigation/native'
-import {Auth} from 'aws-amplify'
+import { Auth } from 'aws-amplify'
 
 const URL_REGEX = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 type IEditableUserField = 'name' | 'username' | 'website' | 'bio';
@@ -37,14 +37,13 @@ const CustomInput = ({control, label, name, multiline, rules={}}: ICustomInput) 
         <Text style={styles.label}>{label}</Text>
         <View style={{flex: 1}}>
         <TextInput 
-            value={value || ''}
-            onChangeText={onChange}
-            onBlur={onBlur}
-            placeholder={label}
-            style={[styles.input, {borderColor: error ? 'red' : colors.lightgrey}]} 
-            multiline={multiline}
-
-          />
+          value={value || ''}
+          onChangeText={onChange}
+          onBlur={onBlur}
+          placeholder={label}
+          style={[styles.input, {borderColor: error ? 'red' : colors.lightgrey}]} 
+          multiline={multiline}
+        />
           {error && <Text style={{color: 'red'}}>{error.message || "Error"}</Text>}
         </View>
       </View>

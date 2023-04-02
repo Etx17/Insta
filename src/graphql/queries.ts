@@ -43,7 +43,6 @@ export const getComment = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -120,7 +119,6 @@ export const listComments = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -181,7 +179,6 @@ export const syncComments = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -244,7 +241,6 @@ export const commentsByUserID = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -307,7 +303,6 @@ export const commentsByPostID = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -368,7 +363,6 @@ export const getLike = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -444,7 +438,6 @@ export const listLikes = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -504,7 +497,6 @@ export const syncLikes = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -566,7 +558,6 @@ export const likesByUserID = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -628,7 +619,6 @@ export const likesByPostID = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
@@ -656,7 +646,6 @@ export const getPost = /* GraphQL */ `
       description
       image
       images
-      vide
       nofComments
       nofLikes
       userID
@@ -738,7 +727,6 @@ export const listPosts = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -796,7 +784,6 @@ export const syncPosts = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -856,7 +843,6 @@ export const postsByUserID = /* GraphQL */ `
         description
         image
         images
-        vide
         nofComments
         nofLikes
         userID
@@ -944,7 +930,6 @@ export const getUser = /* GraphQL */ `
           description
           image
           images
-          vide
           nofComments
           nofLikes
           userID
