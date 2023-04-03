@@ -10,6 +10,7 @@ export const createPost = gql`
       description
       image
       images
+      video
       nofComments
       nofLikes
       userID

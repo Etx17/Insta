@@ -4,6 +4,7 @@ import { Amplify } from 'aws-amplify'
 import awsconfig from './src/aws-exports'
 import AuthContextProvider from './src/contexts/AuthContext'
 import Client from './src/apollo/Client';
+import { MenuProvider } from 'react-native-popup-menu';
 // import InAppBrowser from 'react-native-inappbrowser-reborn'; // cant install the lib without breaking build
 
 // const urlOpener = async (url: string, redirectUrl: string) => {
@@ -25,11 +26,13 @@ Amplify.configure(awsconfig);
 const App = () => {
   return (
     <SafeAreaProvider>
-      <AuthContextProvider>
-        <Client>
-          <Navigation />
-        </Client>
-      </AuthContextProvider>
+      <MenuProvider>
+        <AuthContextProvider>
+          <Client>
+            <Navigation />
+          </Client>
+        </AuthContextProvider>
+      </MenuProvider>
     </SafeAreaProvider>
   );
 };

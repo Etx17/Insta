@@ -58,7 +58,13 @@ BottomTabNavigatorParamsList,
 export type HomeStackNavigatorParamsList = {
     Feed: undefined
     UserProfile: {userId: string}
+    UpdatePost: {postId: string}
 }
+
+export type UpdatePostRouteProp = RouteProp<
+    HomeStackNavigatorParamsList,
+    'UpdatePost'
+>;
 
 export type UserProfileNavigationProp = NativeStackNavigationProp<
     HomeStackNavigatorParamsList,

@@ -28,7 +28,11 @@ const CameraScreen = () => {
   const device = devices[cameraType]
 
   const navigateToCreate = () => {
-    navigation.navigate('Create', {image: "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/4.jpg"})
+    navigation.navigate('Create', {
+      images:[
+       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/4.jpg",
+       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/3.jpg"
+      ]})
   }
 
   const flipCamera = () => {

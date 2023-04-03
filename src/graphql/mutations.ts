@@ -46,6 +46,7 @@ export const createComment = /* GraphQL */ `
         description
         image
         images
+        video
         nofComments
         nofLikes
         userID
@@ -132,6 +133,7 @@ export const updateComment = /* GraphQL */ `
         description
         image
         images
+        video
         nofComments
         nofLikes
         userID
@@ -218,6 +220,7 @@ export const deleteComment = /* GraphQL */ `
         description
         image
         images
+        video
         nofComments
         nofLikes
         userID
@@ -303,6 +306,7 @@ export const createLike = /* GraphQL */ `
         description
         image
         images
+        video
         nofComments
         nofLikes
         userID
@@ -388,6 +392,7 @@ export const updateLike = /* GraphQL */ `
         description
         image
         images
+        video
         nofComments
         nofLikes
         userID
@@ -473,6 +478,7 @@ export const deleteLike = /* GraphQL */ `
         description
         image
         images
+        video
         nofComments
         nofLikes
         userID
@@ -525,6 +531,7 @@ export const createPost = /* GraphQL */ `
       description
       image
       images
+      video
       nofComments
       nofLikes
       userID
@@ -604,6 +611,7 @@ export const updatePost = /* GraphQL */ `
       description
       image
       images
+      video
       nofComments
       nofLikes
       userID
@@ -683,6 +691,7 @@ export const deletePost = /* GraphQL */ `
       description
       image
       images
+      video
       nofComments
       nofLikes
       userID
@@ -803,6 +812,7 @@ export const createUser = /* GraphQL */ `
           description
           image
           images
+          video
           nofComments
           nofLikes
           userID
@@ -874,6 +884,7 @@ export const updateUser = /* GraphQL */ `
           description
           image
           images
+          video
           nofComments
           nofLikes
           userID
@@ -945,6 +956,7 @@ export const deleteUser = /* GraphQL */ `
           description
           image
           images
+          video
           nofComments
           nofLikes
           userID

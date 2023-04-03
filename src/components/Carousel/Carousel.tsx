@@ -61,7 +61,8 @@ const Carousel = ({images, onDoublePress}: ICarousel) => { // <---- ADDED HERE T
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+  },
   image: {
     aspectRatio: 1,
   },
@@ -71,7 +72,7 @@ const styles = StyleSheet.create({
 
     position: 'absolute',
     bottom: 0,
-
+    paddingBottom: 10,
     width: '100%',
   },
   dot: {
