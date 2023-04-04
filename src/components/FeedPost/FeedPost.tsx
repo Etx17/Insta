@@ -47,13 +47,9 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   DeleteLikeMutationVariables
 >(deleteLike) // On a pas encore les infos (ID et version) du like à supprimer, donc on ne peut pas définir les variables ici. On le fait plus tard en dessous
 
-  console.log(usersLikeData?.likesForPostByUser?.items);
-  
   const userLike = (usersLikeData?.likesForPostByUser?.items || []).filter(
     like => !like?._deleted
   )?.[0];
-
-  console.log(userLike, 'this is userLike')
 
 
   const navigation = useNavigation<FeedNavigationProp>();
@@ -67,6 +63,10 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   const navigateToComments = () => {
     navigation.navigate('Comments', {postId: post.id});
   };
+
+  const navigateToLikes = () => {
+    navigation.navigate('PostLikes', {id: post.id})
+  }
 
   const toggleLike = () => {
     if(userLike){
@@ -157,7 +157,7 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
         </View>
 
         {/* Likes */}
-        <Text style={styles.text}>
+        <Text style={styles.text} onPress={navigateToLikes}>
           Liked by <Text style={styles.bold}>lgrinevicius</Text> and{' '}
           <Text style={styles.bold}>{post.nofLikes} others</Text>
         </Text>

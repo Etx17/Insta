@@ -59,7 +59,13 @@ export type HomeStackNavigatorParamsList = {
     Feed: undefined
     UserProfile: {userId: string}
     UpdatePost: {postId: string}
+    PostLikes: {postId: string}
 }
+
+export type PostLikesRouteProp = RouteProp<
+    HomeStackNavigatorParamsList,
+    'PostLikes'
+>;
 
 export type UpdatePostRouteProp = RouteProp<
     HomeStackNavigatorParamsList,
