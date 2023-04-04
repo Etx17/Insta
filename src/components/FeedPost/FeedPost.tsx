@@ -10,11 +10,11 @@ import DoublePressable from '../DoublePressable';
 import Carousel from '../Carousel';
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import { useNavigation } from '@react-navigation/native';
-import { CreateLikeInput, CreateLikeMutation, CreateLikeMutationVariables, DeleteLikeMutation, DeleteLikeMutationVariables, LikesForPostByUserQuery, LikesForPostByUserQueryVariables, Post } from '../../API';
+import { CreateLikeInput, CreateLikeMutation, CreateLikeMutationVariables, DeleteLikeMutation, DeleteLikeMutationVariables, LikesForPostByUserQuery, LikesForPostByUserQueryVariables, Post, UpdatePostMutation, UpdatePostMutationVariables } from '../../API';
 import {DEFAULT_USER_IMAGE} from '../../config'
 import { FeedNavigationProp } from '../../types/navigation';
 import PostMenu from './PostMenu';
-import { createLike, deleteLike, likesForPostByUser } from './queries';
+import { createLike, deleteLike, likesForPostByUser, updatePost } from './queries';
 import { useMutation, useQuery } from '@apollo/client';
 import { useAuthContext } from '../../contexts/AuthContext';
 
@@ -35,6 +35,12 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   >(createLike, {variables: {input: {postID: post.id, userID: userId}}, refetchQueries: ["LikesForPostByUser"] });
   // by default, the mutation will not refetch the query (so the heart would not be red), so we need to specify it in the refetchQueries option
 
+  // Mutation pour updater le nofLike d'un post
+  const [doUpdatePost] = useMutation<
+    UpdatePostMutation, 
+    UpdatePostMutationVariables
+  >(updatePost);
+
   // Mutation pour récupérer les likes d'un post par un user
   const {data: usersLikeData} = useQuery<
     LikesForPostByUserQuery, 
@@ -51,8 +57,23 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
     like => !like?._deleted
   )?.[0];
 
+  const postLikes = post.Likes?.items.filter(like => !like?._deleted) || [];
+
 
   const navigation = useNavigation<FeedNavigationProp>();
+
+    // 
+    const incrementNofLikes = (amount: 1 | -1) => {
+      doUpdatePost(
+        { variables :{
+          input: {
+            id: post.id,
+            _version: post._version,
+            nofLikes: post.nofLikes + amount
+          }
+        }}
+      )
+    }
 
   const navigateToUser = () => {
     if(post.User){
@@ -70,12 +91,11 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
 
   const toggleLike = () => {
     if(userLike){
-      console.log('Deleting like...');
-      doDeleteLike({variables: {input: {id: userLike.id, _version: userLike._version}}})
-      console.log('Deleted?')
+      doDeleteLike({variables: {input: {id: userLike.id, _version: userLike._version}}});
+      incrementNofLikes(-1);
     } else {
-      'Creating like ...'
-    doCreateLike();
+      doCreateLike();
+      incrementNofLikes(1);
     }
   };
 
@@ -157,10 +177,20 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
         </View>
 
         {/* Likes */}
-        <Text style={styles.text} onPress={navigateToLikes}>
-          Liked by <Text style={styles.bold}>lgrinevicius</Text> and{' '}
-          <Text style={styles.bold}>{post.nofLikes} others</Text>
-        </Text>
+        {postLikes.length === 0 ? <Text>Be the first to like this post</Text> : (
+          <Text style={styles.text} onPress={navigateToLikes}>
+            Liked by{' '}
+            <Text style={styles.bold}>{postLikes[0]?.User?.username} </Text> 
+            {postLikes.length > 1 && (
+              <>
+                and{' '}
+                <Text style={styles.bold}>{post.nofLikes - 1} others</Text>
+              </>
+            ) }
+            
+           
+          </Text>
+        )}
 
         {/* Post description */}
         <Text style={styles.text} numberOfLines={isDescriptionExpanded ? 0 : 3}>

@@ -12,7 +12,7 @@ const PostLikesScreen = () => {
     const route = useRoute<PostLikesRouteProp>();
     console.log(route.params, "route.params")
     const {id} = route.params; // Si ca bu c'est que j'ai pas mi id comme lui.
-    const {data, loading, error} = useQuery<
+    const {data, loading, error, refetch} = useQuery<
         LikesForPostByUserQuery, 
         LikesForPostByUserQueryVariables
     >(likesForPostByUser, {variables: {postID: id }});
@@ -25,7 +25,8 @@ const PostLikesScreen = () => {
         <FlatList 
             data={likes}
             renderItem={({item}) => <UserListItem user={item?.User} />}
-            
+            refreshing={loading}
+            onRefresh={refetch}
         />
      
     )
