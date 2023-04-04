@@ -32,17 +32,16 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   const [doCreateLike] = useMutation<
     CreateLikeMutation, 
     CreateLikeMutationVariables
-  >(createLike);
+  >(createLike, {variables: {input: {postID: post.id, userID: userId}}, refetchQueries: ["LikesForPostByUser"] });
+  // by default, the mutation will not refetch the query (so the heart would not be red), so we need to specify it in the refetchQueries option
 
   // Mutation pour récupérer les likes d'un post par un user
   const {data: usersLikeData} = useQuery<
     LikesForPostByUserQuery, 
     LikesForPostByUserQueryVariables
-  >(likesForPostByUser, {variables: {postID: post.id, userID: {eq: userId}} })
+  >(likesForPostByUser, {variables: {postID: post.id, userID: {eq: userId}}})
 
-  console.log(usersLikeData)
   const userLike = (usersLikeData?.likesForPostByUser?.items?.[0])
-  console.log(userLike, ' <-userLike')
   const navigation = useNavigation<FeedNavigationProp>();
 
   const navigateToUser = () => {
@@ -56,7 +55,7 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   };
 
   const toggleLike = () => {
-    doCreateLike({variables: {input: {postID: post.id, userID: userId} }});
+    doCreateLike();
   };
 
   const toggleDescriptionExpanded = () => {
