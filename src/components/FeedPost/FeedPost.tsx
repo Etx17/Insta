@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import { View, Text, LayoutAnimation, Image, Pressable, Platform, UIManager, } from 'react-native';
+import { View, Text, LayoutAnimation, Image, Pressable } from 'react-native';
 import colors from '../../theme/colors';
 import Comment from '../Comment';
 import AntDesign from 'react-native-vector-icons/AntDesign';
@@ -10,13 +10,11 @@ import DoublePressable from '../DoublePressable';
 import Carousel from '../Carousel';
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import { useNavigation } from '@react-navigation/native';
-import { CreateLikeInput, CreateLikeMutation, CreateLikeMutationVariables, DeleteLikeMutation, DeleteLikeMutationVariables, LikesForPostByUserQuery, LikesForPostByUserQueryVariables, Post, UpdatePostMutation, UpdatePostMutationVariables } from '../../API';
+import {  Post } from '../../API';
 import {DEFAULT_USER_IMAGE} from '../../config'
 import { FeedNavigationProp } from '../../types/navigation';
 import PostMenu from './PostMenu';
-import { createLike, deleteLike, likesForPostByUser, updatePost } from './queries';
-import { useMutation, useQuery } from '@apollo/client';
-import { useAuthContext } from '../../contexts/AuthContext';
+import useLikeService from '../../services/LikeService/LikeService';
 
 interface IFeedPost {
   post: Post
@@ -24,56 +22,10 @@ interface IFeedPost {
 }
 
 const FeedPost = ({post, isVisible}: IFeedPost) => {
-  
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-  const {userId} = useAuthContext()
-
-  // Mutation pour créer un like
-  const [doCreateLike] = useMutation<
-    CreateLikeMutation, 
-    CreateLikeMutationVariables
-  >(createLike, {variables: {input: {postID: post.id, userID: userId}}, refetchQueries: ["LikesForPostByUser"] });
-  // by default, the mutation will not refetch the query (so the heart would not be red), so we need to specify it in the refetchQueries option
-
-  // Mutation pour updater le nofLike d'un post
-  const [doUpdatePost] = useMutation<
-    UpdatePostMutation, 
-    UpdatePostMutationVariables
-  >(updatePost);
-
-  // Mutation pour récupérer les likes d'un post par un user
-  const {data: usersLikeData} = useQuery<
-    LikesForPostByUserQuery, 
-    LikesForPostByUserQueryVariables
-  >(likesForPostByUser, {variables: {postID: post.id, userID: {eq: userId}}})
-
-  // Mutation pour delete un like
-  const [doDeleteLike] = useMutation<
-  DeleteLikeMutation,
-  DeleteLikeMutationVariables
->(deleteLike) // On a pas encore les infos (ID et version) du like à supprimer, donc on ne peut pas définir les variables ici. On le fait plus tard en dessous
-
-  const userLike = (usersLikeData?.likesForPostByUser?.items || []).filter(
-    like => !like?._deleted
-  )?.[0];
-
+  const {toggleLike, isLiked} = useLikeService(post);
   const postLikes = post.Likes?.items.filter(like => !like?._deleted) || [];
-
-
   const navigation = useNavigation<FeedNavigationProp>();
-
-    // 
-    const incrementNofLikes = (amount: 1 | -1) => {
-      doUpdatePost(
-        { variables :{
-          input: {
-            id: post.id,
-            _version: post._version,
-            nofLikes: post.nofLikes + amount
-          }
-        }}
-      )
-    }
 
   const navigateToUser = () => {
     if(post.User){
@@ -88,16 +40,6 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   const navigateToLikes = () => {
     navigation.navigate('PostLikes', {id: post.id})
   }
-
-  const toggleLike = () => {
-    if(userLike){
-      doDeleteLike({variables: {input: {id: userLike.id, _version: userLike._version}}});
-      incrementNofLikes(-1);
-    } else {
-      doCreateLike();
-      incrementNofLikes(1);
-    }
-  };
 
   const toggleDescriptionExpanded = () => {
     setIsDescriptionExpanded(existingValue => !existingValue);
@@ -148,10 +90,10 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
         <View style={styles.iconContainer}>
           <Pressable onPress={toggleLike}>
             <AntDesign
-              name={userLike ? 'heart' : 'hearto'}
+              name={isLiked ? 'heart' : 'hearto'}
               size={24}
               style={styles.icon}
-              color={userLike ? colors.accent : colors.black}
+              color={isLiked ? colors.accent : colors.black}
             />
           </Pressable>
 
@@ -187,8 +129,6 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
                 <Text style={styles.bold}>{post.nofLikes - 1} others</Text>
               </>
             ) }
-            
-           
           </Text>
         )}
 
