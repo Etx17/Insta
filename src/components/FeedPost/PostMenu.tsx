@@ -57,8 +57,6 @@ const PostMenu = ({post}: IPostMenu) => {
     }
   };
 
-
-
   return (
     <Menu renderer={renderers.SlideInMenu}>
       <MenuTrigger>
