@@ -64,3 +64,18 @@ export const likesForPostByUser = gql`
     }
   }
 `;
+
+export const deleteLike = gql`
+  mutation DeleteLike(
+    $input: DeleteLikeInput!
+    $condition: ModelLikeConditionInput
+  ) {
+    deleteLike(input: $input, condition: $condition) {
+      id
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;

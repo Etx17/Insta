@@ -10,11 +10,11 @@ import DoublePressable from '../DoublePressable';
 import Carousel from '../Carousel';
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import { useNavigation } from '@react-navigation/native';
-import { CreateLikeInput, CreateLikeMutation, CreateLikeMutationVariables, LikesForPostByUserQuery, LikesForPostByUserQueryVariables, Post } from '../../API';
+import { CreateLikeInput, CreateLikeMutation, CreateLikeMutationVariables, DeleteLikeMutation, DeleteLikeMutationVariables, LikesForPostByUserQuery, LikesForPostByUserQueryVariables, Post } from '../../API';
 import {DEFAULT_USER_IMAGE} from '../../config'
 import { FeedNavigationProp } from '../../types/navigation';
 import PostMenu from './PostMenu';
-import { createLike, likesForPostByUser } from './queries';
+import { createLike, deleteLike, likesForPostByUser } from './queries';
 import { useMutation, useQuery } from '@apollo/client';
 import { useAuthContext } from '../../contexts/AuthContext';
 
@@ -41,7 +41,21 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
     LikesForPostByUserQueryVariables
   >(likesForPostByUser, {variables: {postID: post.id, userID: {eq: userId}}})
 
-  const userLike = (usersLikeData?.likesForPostByUser?.items?.[0])
+  // Mutation pour delete un like
+  const [doDeleteLike] = useMutation<
+  DeleteLikeMutation,
+  DeleteLikeMutationVariables
+>(deleteLike) // On a pas encore les infos (ID et version) du like à supprimer, donc on ne peut pas définir les variables ici. On le fait plus tard en dessous
+
+  console.log(usersLikeData?.likesForPostByUser?.items);
+  
+  const userLike = (usersLikeData?.likesForPostByUser?.items || []).filter(
+    like => !like?._deleted
+  )?.[0];
+
+  console.log(userLike, 'this is userLike')
+
+
   const navigation = useNavigation<FeedNavigationProp>();
 
   const navigateToUser = () => {
@@ -55,7 +69,14 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   };
 
   const toggleLike = () => {
+    if(userLike){
+      console.log('Deleting like...');
+      doDeleteLike({variables: {input: {id: userLike.id, _version: userLike._version}}})
+      console.log('Deleted?')
+    } else {
+      'Creating like ...'
     doCreateLike();
+    }
   };
 
   const toggleDescriptionExpanded = () => {
