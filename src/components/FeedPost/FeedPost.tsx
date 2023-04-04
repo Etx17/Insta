@@ -17,6 +17,7 @@ import PostMenu from './PostMenu';
 import { createLike, deleteLike, likesForPostByUser, updatePost } from './queries';
 import { useMutation, useQuery } from '@apollo/client';
 import { useAuthContext } from '../../contexts/AuthContext';
+import useLikeService from '../../services/LikeService/LikeService';
 
 interface IFeedPost {
   post: Post
@@ -35,11 +36,8 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   >(createLike, {variables: {input: {postID: post.id, userID: userId}}, refetchQueries: ["LikesForPostByUser"] });
   // by default, the mutation will not refetch the query (so the heart would not be red), so we need to specify it in the refetchQueries option
 
-  // Mutation pour updater le nofLike d'un post
-  const [doUpdatePost] = useMutation<
-    UpdatePostMutation, 
-    UpdatePostMutationVariables
-  >(updatePost);
+  // Mutation pour updater le nofLike d'un post, qu'on importe du service LikeService
+  const {incrementNofLikes} = useLikeService(post);
 
   // Mutation pour récupérer les likes d'un post par un user
   const {data: usersLikeData} = useQuery<
@@ -62,18 +60,6 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
 
   const navigation = useNavigation<FeedNavigationProp>();
 
-    // 
-    const incrementNofLikes = (amount: 1 | -1) => {
-      doUpdatePost(
-        { variables :{
-          input: {
-            id: post.id,
-            _version: post._version,
-            nofLikes: post.nofLikes + amount
-          }
-        }}
-      )
-    }
 
   const navigateToUser = () => {
     if(post.User){
