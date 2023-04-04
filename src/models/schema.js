@@ -212,8 +212,10 @@ export const schema = {
                     "type": "key",
                     "properties": {
                         "name": "byPost",
+                        "queryField": "likesForPostByUser",
                         "fields": [
-                            "postID"
+                            "postID",
+                            "userID"
                         ]
                     }
                 },
@@ -559,6 +561,6 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "codegenVersion": "3.3.6",
+    "codegenVersion": "3.4.0",
     "version": "2339b286af7efc9ec765666ac6cd70fb"
 };

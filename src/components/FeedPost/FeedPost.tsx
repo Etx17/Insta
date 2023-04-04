@@ -10,12 +10,13 @@ import DoublePressable from '../DoublePressable';
 import Carousel from '../Carousel';
 import VideoPlayer from '../VideoPlayer/VideoPlayer';
 import { useNavigation } from '@react-navigation/native';
-import { Post } from '../../API';
+import { CreateLikeInput, CreateLikeMutation, CreateLikeMutationVariables, LikesForPostByUserQuery, LikesForPostByUserQueryVariables, Post } from '../../API';
 import {DEFAULT_USER_IMAGE} from '../../config'
 import { FeedNavigationProp } from '../../types/navigation';
 import PostMenu from './PostMenu';
-import { Menu, MenuOptions, MenuTrigger, MenuOption, renderers } from 'react-native-popup-menu'
-import Entypo from 'react-native-vector-icons/Entypo';
+import { createLike, likesForPostByUser } from './queries';
+import { useMutation, useQuery } from '@apollo/client';
+import { useAuthContext } from '../../contexts/AuthContext';
 
 interface IFeedPost {
   post: Post
@@ -25,8 +26,23 @@ interface IFeedPost {
 const FeedPost = ({post, isVisible}: IFeedPost) => {
   
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
-  const [isLiked, setIsLiked] = useState(true);
+  const {userId} = useAuthContext()
 
+  // Mutation pour créer un like
+  const [doCreateLike] = useMutation<
+    CreateLikeMutation, 
+    CreateLikeMutationVariables
+  >(createLike);
+
+  // Mutation pour récupérer les likes d'un post par un user
+  const {data: usersLikeData} = useQuery<
+    LikesForPostByUserQuery, 
+    LikesForPostByUserQueryVariables
+  >(likesForPostByUser, {variables: {postID: post.id, userID: {eq: userId}} })
+
+  console.log(usersLikeData)
+  const userLike = (usersLikeData?.likesForPostByUser?.items?.[0])
+  console.log(userLike, ' <-userLike')
   const navigation = useNavigation<FeedNavigationProp>();
 
   const navigateToUser = () => {
@@ -40,7 +56,7 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
   };
 
   const toggleLike = () => {
-    setIsLiked(v => !v);
+    doCreateLike({variables: {input: {postID: post.id, userID: userId} }});
   };
 
   const toggleDescriptionExpanded = () => {
@@ -80,8 +96,6 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
           style={styles.userAvatar}
         />
         <Text onPress={navigateToUser} style={styles.userName}>{post.User?.username}</Text>
-
-        
         <PostMenu post={post}/>
             
       </View>
@@ -94,10 +108,10 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
         <View style={styles.iconContainer}>
           <Pressable onPress={toggleLike}>
             <AntDesign
-              name={isLiked ? 'heart' : 'hearto'}
+              name={userLike ? 'heart' : 'hearto'}
               size={24}
               style={styles.icon}
-              color={isLiked ? colors.accent : colors.black}
+              color={userLike ? colors.accent : colors.black}
             />
           </Pressable>
 
