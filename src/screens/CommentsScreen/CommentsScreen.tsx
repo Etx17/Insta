@@ -1,19 +1,45 @@
-import { View, Text, StyleSheet, FlatList } from 'react-native'
-import React from 'react'
-import comments from '../../assets/data/comments.json'
+import { View, Text, StyleSheet, FlatList, ActivityIndicator } from 'react-native'
+import React, { useEffect, useState } from 'react'
+// import comments from '../../assets/data/comments.json'
 // import models from '../../types/models'
 import Comment from '../../components/Comment/Comment'
 import Input from './Input'
+import { useRoute } from '@react-navigation/native'
+import { CommentsRouteProp, CreateCommentRouteProp } from '../../types/navigation'
+import { useMutation, useQuery } from '@apollo/client'
+import { commentsByPost } from './queries'
+import ApiErrorMessage from '../../components/ApiErrorMessage/ApiErrorMessage'
+import { CommentsByPostQuery, CommentsByPostQueryVariables } from '../../API'
+
 const CommentsScreen = () => {
+  const route = useRoute<CommentsRouteProp>();
+  const postId = route.params?.postId;
+  const [comments, setComments] = useState([])
+  
+  // Query comments of post
+  const {data, loading, error, refetch} = useQuery<
+        CommentsByPostQuery,
+        CommentsByPostQueryVariables
+    >(commentsByPost, {variables: {postID: postId }});
+  
+  useEffect(() => {
+    if(data){
+      const commentsFetched = (data?.commentsByPost?.items || []).filter( comment => !comment?._deleted )
+      setComments(commentsFetched)
+  }}, [data])
+
+  if (loading) { return <ActivityIndicator/> }
+  if (error) { return <ApiErrorMessage title='Error fetching likes' message={error.message}/> }
 
   return (
     <View style={{flex: 1}}>
       <FlatList 
-        data={comments}
+        data={comments} // reemplacer ca par les comments de la query
         renderItem = {({item}) => <Comment comment={item} includeDetails={true}/>}  
         style={{padding: 10}}
+        ListEmptyComponent={<Text>No comments yet</Text>}
       />
-      <Input />
+      <Input postId={postId}/>
     </View>
   )
 }
