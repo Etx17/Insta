@@ -10,8 +10,7 @@ import UserListItem from '../../components/UserListItem/UserListItem';
 
 const PostLikesScreen = () => {
     const route = useRoute<PostLikesRouteProp>();
-    console.log(route.params, "route.params")
-    const {id} = route.params; // Si ca bu c'est que j'ai pas mi id comme lui.
+    const {id} = route.params; // id du post
     const {data, loading, error, refetch} = useQuery<
         LikesForPostByUserQuery, 
         LikesForPostByUserQueryVariables

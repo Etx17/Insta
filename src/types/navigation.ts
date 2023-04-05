@@ -7,6 +7,15 @@ export type RootNavigatorParamsList = {
     Comments: {postId: string},
     Auth: undefined,
 }
+export type CreateCommentRouteProp = RouteProp<
+  RootNavigatorParamsList,
+ 'Comments'
+ >;
+ 
+export type CommentsRouteProp = RouteProp<
+RootNavigatorParamsList,
+'Comments'
+>;
 
 export type BottomTabNavigatorParamsList = {
     HomeStack: undefined
