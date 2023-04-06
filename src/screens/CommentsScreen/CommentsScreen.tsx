@@ -9,7 +9,7 @@ import { CommentsRouteProp, CreateCommentRouteProp } from '../../types/navigatio
 import { useMutation, useQuery } from '@apollo/client'
 import { commentsByPost } from './queries'
 import ApiErrorMessage from '../../components/ApiErrorMessage/ApiErrorMessage'
-import { CommentsByPostQuery, CommentsByPostQueryVariables } from '../../API'
+import { CommentsByPostQuery, CommentsByPostQueryVariables, ModelSortDirection } from '../../API'
 
 const CommentsScreen = () => {
   const route = useRoute<CommentsRouteProp>();
@@ -20,7 +20,7 @@ const CommentsScreen = () => {
   const {data, loading, error, refetch} = useQuery<
         CommentsByPostQuery,
         CommentsByPostQueryVariables
-    >(commentsByPost, {variables: {postID: postId }});
+    >(commentsByPost, {variables: {postID: postId, sortDirection: ModelSortDirection.DESC }});
   
   useEffect(() => {
     if(data){

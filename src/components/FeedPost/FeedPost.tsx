@@ -15,6 +15,7 @@ import {DEFAULT_USER_IMAGE} from '../../config'
 import { FeedNavigationProp } from '../../types/navigation';
 import PostMenu from './PostMenu';
 import useLikeService from '../../services/LikeService/LikeService';
+import dayjs from 'dayjs';
 
 interface IFeedPost {
   post: Post
@@ -149,7 +150,7 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
         ))}
 
         {/* Posted date */}
-        <Text>{post.createdAt}</Text>
+        <Text>{dayjs(post.createdAt).fromNow()}</Text>
       </View>
     </View>
   );

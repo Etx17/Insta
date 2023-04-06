@@ -10,6 +10,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "comment": {
                     "name": "comment",
                     "isArray": false,
@@ -61,14 +68,6 @@ export const schema = {
                         ]
                     }
                 },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
                 "updatedAt": {
                     "name": "updatedAt",
                     "isArray": false,
@@ -100,7 +99,8 @@ export const schema = {
                         "name": "byPost",
                         "queryField": "commentsByPost",
                         "fields": [
-                            "postID"
+                            "postID",
+                            "createdAt"
                         ]
                     }
                 },
@@ -248,6 +248,20 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "type": {
+                    "name": "type",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
                 "description": {
                     "name": "description",
                     "isArray": false,
@@ -345,14 +359,6 @@ export const schema = {
                         ]
                     }
                 },
-                "createdAt": {
-                    "name": "createdAt",
-                    "isArray": false,
-                    "type": "AWSDateTime",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isReadOnly": true
-                },
                 "updatedAt": {
                     "name": "updatedAt",
                     "isArray": false,
@@ -368,6 +374,17 @@ export const schema = {
                 {
                     "type": "model",
                     "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "postsByType",
+                        "queryField": "postsByDate",
+                        "fields": [
+                            "type",
+                            "createdAt"
+                        ]
+                    }
                 },
                 {
                     "type": "key",
@@ -563,5 +580,5 @@ export const schema = {
     "enums": {},
     "nonModels": {},
     "codegenVersion": "3.4.0",
-    "version": "2339b286af7efc9ec765666ac6cd70fb"
+    "version": "c9dde56066d9a6a3cd8b7ccf331eb7df"
 };

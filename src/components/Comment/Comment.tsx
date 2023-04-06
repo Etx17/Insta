@@ -5,6 +5,7 @@ import fonts from '../../theme/fonts'
 import { Comment as CommentType} from '../../API';
 import { useState } from 'react';
 import {DEFAULT_USER_IMAGE} from '../../config'
+import dayjs from 'dayjs';
 interface ICommentProps {
     comment: CommentType;
     includeDetails: boolean;
@@ -29,7 +30,7 @@ const Comment = ({comment, includeDetails = false}: ICommentProps) => {
           </Text>
           { includeDetails && (
             <View style={styles.footer}>
-              <Text style={styles.footerText}>2d </Text>
+              <Text style={styles.footerText}>{dayjs(comment.createdAt).fromNow()} </Text>
               <Text style={styles.footerText}>5 likes </Text>
               <Text style={styles.footerText}>reply</Text>
             </View>
