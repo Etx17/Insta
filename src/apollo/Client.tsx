@@ -22,19 +22,23 @@ const link = ApolloLink.from([
     createSubscriptionHandshakeLink({url, region, auth}, httpLink)
 ]);   
             
-
+const mergeLists = (existing = {items: []}, incoming = {items: []}) => {
+    return {
+        ...existing,
+        ...incoming,
+        items: [...(existing?.items || []), ...incoming.items],
+    };
+}
 const typePolicies: TypePolicies = { // Repreents how we shold merge objects in our cache, needed for pagination
     Query: {
         fields: {
             commentsByPost: {
-                keyArgs: ['postID', 'createdAt', 'sortDirection', 'filter'], // need to specify arguments of query that shold trigger Apollo to save the results in different buckets.
-                merge: (existing, incoming) => {
-                    return {
-                        ...existing,
-                        ...incoming,
-                        items: [...(existing?.items || []), ...incoming.items],
-                    };
-                },
+                keyArgs: ['postID', 'createdAt', 'sortDirection', 'filter'], // this line is important, it tells apollo how to merge the results of the query
+                merge: mergeLists,
+            },
+            postsByDate: {
+                keyArgs: ['type', 'createdAt', 'sortDirection', 'filter'], 
+                merge: mergeLists,
             },
         },
     },
