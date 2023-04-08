@@ -11,10 +11,23 @@ const HomeScreen = () => {
   
   const [activePostId, setActivePostId] = useState<string | null>(null);
 
-  const {data, loading, error, refetch} = useQuery<
+  const {data, loading, error, refetch, fetchMore} = useQuery<
     PostsByDateQuery, 
     PostsByDateQueryVariables 
-  >(postsByDate, {variables: {type: 'POST', sortDirection: ModelSortDirection.DESC}});     
+  >(postsByDate, {variables: {type: 'POST', sortDirection: ModelSortDirection.DESC, limit: 3}});     
+
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
+  const nextToken = data?. postsByDate?.nextToken;
+  
+  const loadMore = async () => {
+    if(!nextToken || isFetchingMore){
+      return 
+    }
+    setIsFetchingMore(true)
+    await fetchMore({ variables: { nextToken } })
+
+    setIsFetchingMore(false)
+  }
 
   const viewabilityConfig: ViewabilityConfig = {
     itemVisiblePercentThreshold: 51,
@@ -45,6 +58,7 @@ const HomeScreen = () => {
         onViewableItemsChanged={onViewableItemsChanged.current}
         onRefresh={() => refetch()}
         refreshing={loading}
+        onEndReached={() => loadMore()}
       />
 
   )
