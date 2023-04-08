@@ -82,6 +82,12 @@ export const createComment = gql`
         _deleted
         _lastChangedAt
         }
+      User {
+        id 
+        name
+        image
+        username 
+      }
       createdAt
       updatedAt
       _version

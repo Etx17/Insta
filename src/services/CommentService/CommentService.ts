@@ -22,7 +22,7 @@ const useCommentService = (postId: string) => {
   const [doCreateComment] = useMutation<
     CreateCommentMutation, 
     CreateCommentMutationVariables
-  >(createComment, {refetchQueries: ['CommentsByPost']} )
+  >(createComment) //, {refetchQueries: ['CommentsByPost']} ) We dont need it anymore as we have live data with subscriptions
 
   const incrementNofComments = (amount: 1 | -1) => {
     if(!post) {
