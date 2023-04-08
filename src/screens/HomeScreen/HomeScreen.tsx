@@ -3,9 +3,8 @@ import { useRef, useState } from "react";
 import FeedPost from "../../components/FeedPost/FeedPost";
 import { useQuery } from "@apollo/client";
 import { postsByDate } from "./queries";
-import { ListPostsQuery, ListPostsQueryVariables, ModelSortDirection, PostsByDateQuery, PostsByDateQueryVariables } from "../../API";
+import { ModelSortDirection, PostsByDateQuery, PostsByDateQueryVariables } from "../../API";
 import ApiErrorMessage from "../../components/ApiErrorMessage/ApiErrorMessage";
-import { SortDirection } from "aws-amplify";
 
 
 const HomeScreen = () => {

@@ -1,4 +1,4 @@
-import { ApolloClient, InMemoryCache, ApolloLink, ApolloProvider, createHttpLink } from '@apollo/client';
+import { ApolloClient, InMemoryCache, ApolloLink, ApolloProvider, createHttpLink, TypePolicies } from '@apollo/client';
 import {createAuthLink} from 'aws-appsync-auth-link'
 import { AuthOptions, AUTH_TYPE } from 'aws-appsync-auth-link/lib/auth-link';
 import {createSubscriptionHandshakeLink} from 'aws-appsync-subscription-link'
@@ -23,9 +23,26 @@ const link = ApolloLink.from([
 ]);   
             
 
+const typePolicies: TypePolicies = { // Repreents how we shold merge objects in our cache, needed for pagination
+    Query: {
+        fields: {
+            commentsByPost: {
+                keyArgs: ['postID', 'createdAt', 'sortDirection', 'filter'], // need to specify arguments of query that shold trigger Apollo to save the results in different buckets.
+                merge: (existing, incoming) => {
+                    return {
+                        ...existing,
+                        ...incoming,
+                        items: [...(existing?.items || []), ...incoming.items],
+                    };
+                },
+            },
+        },
+    },
+}
+
 const client = new ApolloClient({
     link,
-    cache: new InMemoryCache(),
+    cache: new InMemoryCache({typePolicies}),
   });
 
 const Client = ({children}: IClient) => {

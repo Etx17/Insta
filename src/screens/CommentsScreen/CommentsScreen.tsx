@@ -17,16 +17,29 @@ const CommentsScreen = () => {
   const [comments, setComments] = useState([])
   
   // Query comments of post
-  const {data, loading, error, refetch} = useQuery<
+  const {data, loading, error, fetchMore} = useQuery<
         CommentsByPostQuery,
         CommentsByPostQueryVariables
-    >(commentsByPost, {variables: {postID: postId, sortDirection: ModelSortDirection.DESC }});
+    >(commentsByPost, {variables: {postID: postId, sortDirection: ModelSortDirection.DESC, limit: 15 }});
   
+    const [isFetchingMore, setIsFetchingMore] = useState(false);
   useEffect(() => {
     if(data){
       const commentsFetched = (data?.commentsByPost?.items || []).filter( comment => !comment?._deleted )
       setComments(commentsFetched)
   }}, [data])
+
+  const nextToken = data?. commentsByPost?.nextToken;
+
+  const loadMore = async () => {
+    if(!nextToken || isFetchingMore){
+      return 
+    }
+    setIsFetchingMore(true)
+    await fetchMore({ variables: { nextToken } })
+
+    setIsFetchingMore(false)
+  }
 
   if (loading) { return <ActivityIndicator/> }
   if (error) { return <ApiErrorMessage title='Error fetching likes' message={error.message}/> }
@@ -38,6 +51,7 @@ const CommentsScreen = () => {
         renderItem = {({item}) => <Comment comment={item} includeDetails={true}/>}  
         style={{padding: 10}}
         ListEmptyComponent={<Text>No comments yet</Text>}
+        onEndReached={() => loadMore()}
       />
       <Input postId={postId}/>
     </View>
