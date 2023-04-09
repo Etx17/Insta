@@ -36,7 +36,7 @@ const CommentsScreen = () => {
     OnCreateCommentByPostIdSubscriptionVariables
   >(onCreateCommentByPostId, {variables: {postID: postId}});
   
-  console.log('newCommentsData', newCommentsData)
+
 
   const [isFetchingMore, setIsFetchingMore] = useState(false);
 

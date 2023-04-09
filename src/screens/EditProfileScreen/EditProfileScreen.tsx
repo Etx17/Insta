@@ -113,7 +113,7 @@ const EditProfileScreen = () => {
       if(!didCancel && !errorCode && assets && assets.length > 0){
         setSelectedPhoto(assets[0])
       }
-    })}
+  })}
 
   if(loading || updateLoading || deleteLoading ){ return (<ActivityIndicator/>) }
   if(error || updateError || deleteError){ return <ApiErrorMessage title='Error fetching or updating user' message={error?.message || updateError?.message || deleteError?.message}/> }

@@ -56,11 +56,10 @@ const typePolicies: TypePolicies = { // Repreents how we shold merge objects in 
 
 const Client = ({children}: IClient) => {
     const {user} = useAuthContext();
-    console.log(user, 'user');
-    
+
     const client = useMemo(() => {
         const jwtToken = user?.getSignInUserSession()?.getAccessToken().getJwtToken() || '';
-        console.log(jwtToken, 'jwtToken');
+
         
         const auth: AuthOptions = {
             type: config.aws_appsync_authenticationType as AUTH_TYPE.AMAZON_COGNITO_USER_POOLS,
@@ -72,7 +71,7 @@ const Client = ({children}: IClient) => {
             createSubscriptionHandshakeLink({url, region, auth}, httpLink)
         ]);   
 
-        console.log('Auth object:', auth);
+
         return new ApolloClient({
             link,
             cache: new InMemoryCache({typePolicies}),
@@ -96,7 +95,7 @@ const Client = ({children}: IClient) => {
     //             cache: new InMemoryCache({typePolicies}),
     //         });
 
-    console.log(client, 'this is client');
+
     return <ApolloProvider client={client}>{children}</ApolloProvider>
     
     };

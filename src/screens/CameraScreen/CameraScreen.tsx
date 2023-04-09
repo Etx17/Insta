@@ -6,6 +6,7 @@ import colors from '../../theme/colors';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native';
 import { CameraNavigationProp } from '../../types/navigation';
+import { launchImageLibrary } from 'react-native-image-picker';
 const CameraScreen = () => {
   const [hasPermissions, setHasPermissions] = useState<boolean | null>(null);
   const [cameraType, setCameraType] = useState('back');
@@ -27,13 +28,13 @@ const CameraScreen = () => {
   const devices = useCameraDevices()
   const device = devices[cameraType]
 
-  const navigateToCreate = () => {
-    navigation.navigate('Create', {
-      images:[
-       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/4.jpg",
-       "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/3.jpg"
-      ]})
-  }
+  // const navigateToCreate = () => {
+  //   navigation.navigate('Create', {
+  //     images:[
+  //      "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/4.jpg",
+  //      "https://notjustdev-dummy.s3.us-east-2.amazonaws.com/images/3.jpg"
+  //     ]})
+  // }
 
   const flipCamera = () => {
     setCameraType(currentCameraType => currentCameraType === 'back' ? 'front' : 'back')
@@ -49,7 +50,7 @@ const CameraScreen = () => {
         quality: 0.5,
       });
       console.log(photo);
-      navigateToCreate();
+      // navigateToCreate();
     }
 
     if(device == null) {
@@ -83,6 +84,20 @@ const CameraScreen = () => {
     }
   }
 
+  const openImageGallery = () => {
+    launchImageLibrary(
+      {mediaType: 'photo'}, 
+      ({didCancel, errorCode, assets}) => {
+      if(!didCancel && !errorCode && assets && assets.length > 0){
+        if (assets.length === 1) {
+          navigation.navigate('Create', {
+            image:
+            assets[0].uri,
+          });
+        }
+      }
+  })}
+
   if (hasPermissions === null) {
     return <Text>Loading...</Text>;
   }
@@ -110,7 +125,9 @@ const CameraScreen = () => {
         <MaterialIcons name="settings" size={30} color={colors.white} />
       </View>
       <View style={[styles.buttonsContainer, {bottom: 0}]}>
-        <MaterialIcons name="photo-library" size={30} color={colors.white} />
+        <Pressable onPress={openImageGallery}>
+          <MaterialIcons name="photo-library" size={30} color={colors.white} />
+        </Pressable>
 
         <Pressable onPress={takePicture} onLongPress={startRecording} onPressOut={stopRecording}>
           <View style={[styles.circle, {backgroundColor: isRecording ? colors.accent : colors.white }]} />

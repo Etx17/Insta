@@ -1,0 +1,14 @@
+{
+  "resourceName": "storageinsta",
+  "policyUUID": "5aad5a92",
+  "bucketName": "instaetxnative-media",
+  "storageAccess": "auth",
+  "guestAccess": [],
+  "authAccess": [
+    "CREATE_AND_UPDATE",
+    "READ",
+    "DELETE"
+  ],
+  "triggerFunction": "NONE",
+  "groupAccess": {}
+}

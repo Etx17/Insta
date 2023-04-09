@@ -24,6 +24,9 @@
       },
       "api": {
         "Insta": {}
+      },
+      "storage": {
+        "storageinsta": {}
       }
     }
   }

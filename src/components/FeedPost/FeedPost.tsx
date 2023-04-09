@@ -16,6 +16,7 @@ import { FeedNavigationProp } from '../../types/navigation';
 import PostMenu from './PostMenu';
 import useLikeService from '../../services/LikeService/LikeService';
 import dayjs from 'dayjs';
+import Content from './Content';
 
 interface IFeedPost {
   post: Post
@@ -47,25 +48,25 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   };
 
-  let content;
-  if (post.image) { /// HERE
-    content = (
-      <DoublePressable onDoublePress={toggleLike}>
-        <Image
-          source={{
-            uri: post.image,
-          }}
-          style={styles.image}
-        />
-      </DoublePressable>
-    );
-  } else if (post.images) {
-    content = <Carousel images={post.images} onDoublePress={toggleLike} />;
-  } else if (post.video){
-    content = (
-        <VideoPlayer uri={post.video} paused={!isVisible}/>
-    )
-  }
+  // let content;
+  // if (post.image) { /// HERE
+  //   content = (
+  //     <DoublePressable onDoublePress={toggleLike}>
+  //       <Image
+  //         source={{
+  //           uri: post.image,
+  //         }}
+  //         style={styles.image}
+  //       />
+  //     </DoublePressable>
+  //   );
+  // } else if (post.images) {
+  //   content = <Carousel images={post.images} onDoublePress={toggleLike} />;
+  // } else if (post.video){
+  //   content = (
+  //       <VideoPlayer uri={post.video} paused={!isVisible}/>
+  //   )
+  // }
 
   return (
     <View style={styles.post}>
@@ -84,7 +85,9 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
       </View>
 
       {/* Content */}
-      {content} 
+      <DoublePressable onDoublePress={toggleLike}>
+        <Content post={post} isVisible={isVisible}/>
+      </DoublePressable>
 
       {/* Footer */}
       <View style={styles.footer}>
