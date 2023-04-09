@@ -23,13 +23,14 @@ const CreatePostScreen = () => {
     CreatePostMutationVariables>
     (createPost)
   const navigation = useNavigation<CreateNavigationProp>();
-
+  
   let content;
+ 
   if (image) { /// HERE
     content = (
       <Image
         source={{
-          uri: image,
+          uri: image.startsWith('/data') ?  `file://${image}` : image,
         }}
         style={styles.image}
         resizeMode={'cover'}
@@ -78,16 +79,26 @@ const CreatePostScreen = () => {
 
   const uploadMedia = async (uri: string) => {
     try {
+      // If image is frm local storage, we cannot use fetch. We have to use react native fs
+        // TODO
+
+      //  If image is not local, ex come from downloads, then we can use fetch. 
       // get the blob of the file frm uri
       const response = await fetch(uri);
       const blob = await response.blob();
+
+      const timestamp = new Date().getTime();
+      const randomNum = Math.floor(Math.random() * 1000000);
+
+      const uriParts = uri.split('.');
+      const extension = uriParts[uriParts.length - 1];
+      
+      const uniqueName = `${userId}-${timestamp}-${randomNum}.${extension}`;
       // upload the file in a blob format to S3
       // Give it a unique name 
 
-      const s3Response = await Storage.put("giveitauniquename.jpg", blob)
+      const s3Response = await Storage.put(uniqueName, blob)
 
-      console.log(s3Response, 's3Response');
-      
       return s3Response.key;
     } catch(e) {
       Alert.alert('Error uploading the file', (e as Error).message)

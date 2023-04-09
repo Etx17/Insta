@@ -49,8 +49,9 @@ const CameraScreen = () => {
       const photo = await camera.current.takeSnapshot({
         quality: 0.5,
       });
-      console.log(photo);
+      console.log(photo.path, 'this is from takePicture');
       // navigateToCreate();
+      navigation.navigate('Create', { image: photo.path});
     }
 
     if(device == null) {
@@ -90,10 +91,7 @@ const CameraScreen = () => {
       ({didCancel, errorCode, assets}) => {
       if(!didCancel && !errorCode && assets && assets.length > 0){
         if (assets.length === 1) {
-          navigation.navigate('Create', {
-            image:
-            assets[0].uri,
-          });
+          navigation.navigate('Create', { image: assets[0].uri, });
         }
       }
   })}
@@ -129,7 +127,7 @@ const CameraScreen = () => {
           <MaterialIcons name="photo-library" size={30} color={colors.white} />
         </Pressable>
 
-        <Pressable onPress={takePicture} onLongPress={startRecording} onPressOut={stopRecording}>
+        <Pressable onPress={takePicture} >
           <View style={[styles.circle, {backgroundColor: isRecording ? colors.accent : colors.white }]} />
         </Pressable>
        
