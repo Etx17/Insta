@@ -1,5 +1,13 @@
 {
   "AppSyncApiName": "Insta",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authInsta",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2023-04-09T09:08:44.538Z",
+  "defaultAuthenticationType": "AMAZON_COGNITO_USER_POOLS"
 }

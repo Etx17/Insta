@@ -58,6 +58,7 @@ exports.handler = async (event, context) => {
 
   const newUser = { 
     id: sub, 
+    owner: sub, // for the changes made in Authorizations, we need to provide owner field.
     name,
     email,
     nofPosts: 0,

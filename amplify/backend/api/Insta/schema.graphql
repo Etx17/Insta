@@ -1,4 +1,4 @@
-type Comment @model @auth(rules: [{allow: public}]) {
+type Comment @model @auth(rules: [{allow: private, operations: [read]}, {allow: owner}]) {
   id: ID!
   createdAt: AWSDateTime!
   comment: String!
@@ -8,7 +8,7 @@ type Comment @model @auth(rules: [{allow: public}]) {
   Post: Post @belongsTo(fields: ["postID"])
 }
 
-type Like @model @auth(rules: [{allow: public}]) {
+type Like @model @auth(rules: [{allow: private, operations: [read]}, {allow: owner}]) {
   id: ID!
   userID: ID! @index(name: "byUser")
   postID: ID! @index(name: "byPost", queryField: "likesForPostByUser", sortKeyFields: ["userID"])
@@ -16,7 +16,7 @@ type Like @model @auth(rules: [{allow: public}]) {
   Post: Post @belongsTo(fields: ["postID"])
 }
 
-type Post @model @auth(rules: [{allow: public}]) {
+type Post @model @auth(rules: [{allow: private, operations: [read]}, {allow: owner}]) {
   id: ID!
   createdAt: AWSDateTime!
   type: String! @index(name: "postsByType", queryField: "postsByDate", sortKeyFields: "createdAt")
@@ -32,10 +32,10 @@ type Post @model @auth(rules: [{allow: public}]) {
   Likes: [Like] @hasMany(indexName: "byPost", fields: ["id"])
 }
 
-type User @model @auth(rules: [{allow: public}]) {
+type User @model @auth(rules: [{allow: private, operations: [read]}, {allow: owner}]) {
   id: ID!
   name: String!
-  email: String
+  email: String @auth(rules: [{allow: owner}]) # only owner can read email, prevent email frm being exposed
   bio: String
   website: String
   nofPosts: Int!

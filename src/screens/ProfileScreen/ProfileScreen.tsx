@@ -19,12 +19,14 @@ const ProfileScreen = () => {
   const {userId: authUserId} = useAuthContext();
 
   const userId = route.params?.userId || authUserId;
+  console.log(userId);
+  
   
   const {data, loading, error, refetch} = useQuery<GetUserQuery, GetUserQueryVariables>(getUser, {variables: {id: userId}})
 
   if(loading){ return <ActivityIndicator/> }
   if(error || !data?.getUser){ //ai remplacé !user par !data?.getUser
-    return (
+    return ( //erreur, pas authorisé a query mon user
     <ApiErrorMessage 
       title="Error fetching the user" 
       message={error?.message || 'User not found'}
@@ -32,6 +34,8 @@ const ProfileScreen = () => {
     /> )}
   
   const user = data?.getUser
+
+  
   return (
     <FeedGridView 
       data={user.Posts?.items || []} 
