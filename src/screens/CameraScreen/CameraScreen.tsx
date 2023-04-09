@@ -7,13 +7,14 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { useNavigation } from '@react-navigation/native';
 import { CameraNavigationProp } from '../../types/navigation';
 import { launchImageLibrary } from 'react-native-image-picker';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 const CameraScreen = () => {
   const [hasPermissions, setHasPermissions] = useState<boolean | null>(null);
   const [cameraType, setCameraType] = useState('back');
   const [flash, setFlash] = useState('off');
   const [isCameraReady, setIsCameraReady] = useState(false);
   const [isRecording, setIsRecording] = useState(false)
-
+  const inset = useSafeAreaInsets();
   const navigation = useNavigation<CameraNavigationProp>();
   useEffect(() => {
     const getPermission = async () => {
@@ -115,7 +116,7 @@ const CameraScreen = () => {
         photo={true}
         video={true}
       />
-      <View style={[styles.buttonsContainer, {top: 20}]}>
+      <View style={[styles.buttonsContainer, {top: inset.top + 20}]}>
         <MaterialIcons name="close" size={30} color={colors.white} />
         <Pressable onPress={toggleFlash}>
           <MaterialIcons name={flash === "on" ? "flash-on" : "flash-off"} size={30} color={colors.white} />

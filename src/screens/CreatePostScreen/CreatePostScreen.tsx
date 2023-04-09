@@ -10,7 +10,7 @@ import { useAuthContext } from '../../contexts/AuthContext'
 import Carousel from '../../components/Carousel'
 import VideoPlayer from '../../components/VideoPlayer/VideoPlayer'
 import { Storage } from 'aws-amplify'
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const CreatePostScreen = () => {
   const {userId} = useAuthContext()
@@ -106,7 +106,7 @@ const CreatePostScreen = () => {
   }
 
   return (
-    <View style={styles.root}>
+    <KeyboardAwareScrollView contentContainerStyle={styles.root}>
       
       <View style={styles.content}>{content}</View>
       <TextInput 
@@ -119,7 +119,7 @@ const CreatePostScreen = () => {
       />
 
       <Button text={isSubmitting ? 'Submitting...' : 'Submit'} onPress={submit}/>
-    </View>
+    </KeyboardAwareScrollView>
   )
 }
 const styles = StyleSheet.create({
