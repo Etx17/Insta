@@ -20,7 +20,40 @@
         "InstaPostConfirmation": {
           "deploymentBucketName": "amplify-insta-staging-155522-deployment",
           "s3Key": "amplify-builds/InstaPostConfirmation-7839625774784d576e6b-build.zip"
-        }
+        },
+        "Insta": {}
+      },
+      "api": {
+        "Insta": {}
+      },
+      "storage": {
+        "storageinsta": {}
+      }
+    }
+  },
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-insta-dev-161926-authRole",
+      "UnauthRoleArn": "arn:aws:iam::117680609371:role/amplify-insta-dev-161926-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::117680609371:role/amplify-insta-dev-161926-authRole",
+      "Region": "eu-west-3",
+      "DeploymentBucketName": "amplify-insta-dev-161926-deployment",
+      "UnauthRoleName": "amplify-insta-dev-161926-unauthRole",
+      "StackName": "amplify-insta-dev-161926",
+      "StackId": "arn:aws:cloudformation:eu-west-3:117680609371:stack/amplify-insta-dev-161926/b4d2a7f0-d7aa-11ed-a712-0e94c2f696c2",
+      "AmplifyAppId": "d1qhrsojhchgsr",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-insta-dev-161926-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "Insta": {}
+      },
+      "function": {
+        "InstaPostConfirmation": {
+          "deploymentBucketName": "amplify-insta-dev-161926-deployment",
+          "s3Key": "amplify-builds/InstaPostConfirmation-7839625774784d576e6b-build.zip"
+        },
+        "Insta": {}
       },
       "api": {
         "Insta": {}
