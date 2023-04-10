@@ -64,6 +64,9 @@ const CreatePostScreen = () => {
       const imageKey = await uploadMedia(image);
       input.image = imageKey;
       console.log(input.image)
+    } else if (images){
+      const imagesKeys = await Promise.all(images.map(img =>uploadMedia(img)))
+      input.images = imagesKeys.filter(key => key !== undefined) as string[];
     }
     try {
       await doCreatePost({ variables: { input }})
