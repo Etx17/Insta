@@ -82,11 +82,7 @@ const CreatePostScreen = () => {
 
   const uploadMedia = async (uri: string) => {
     try {
-      // If image is frm local storage, we cannot use fetch. We have to use react native fs
-        // TODO
-
-      //  If image is not local, ex come from downloads, then we can use fetch. 
-      // get the blob of the file frm uri
+      
       const response = await fetch(uri);
       const blob = await response.blob();
 
@@ -97,9 +93,7 @@ const CreatePostScreen = () => {
       const extension = uriParts[uriParts.length - 1];
       
       const uniqueName = `${userId}-${timestamp}-${randomNum}.${extension}`;
-      // upload the file in a blob format to S3
-      // Give it a unique name 
-
+   
       const s3Response = await Storage.put(uniqueName, blob)
 
       return s3Response.key;

@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import { View, Text, LayoutAnimation, Image, Pressable } from 'react-native';
 import colors from '../../theme/colors';
 import Comment from '../Comment';
@@ -17,6 +17,8 @@ import PostMenu from './PostMenu';
 import useLikeService from '../../services/LikeService/LikeService';
 import dayjs from 'dayjs';
 import Content from './Content';
+import { Storage } from 'aws-amplify';
+import UserImage from '../UserImage/UserImage';
 
 interface IFeedPost {
   post: Post
@@ -24,10 +26,17 @@ interface IFeedPost {
 }
 
 const FeedPost = ({post, isVisible}: IFeedPost) => {
+  const [imageUri, setImageUri] = useState<string | null>(null);
   const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false);
   const {toggleLike, isLiked} = useLikeService(post);
   const postLikes = post.Likes?.items.filter(like => !like?._deleted) || [];
   const navigation = useNavigation<FeedNavigationProp>();
+
+  useEffect(() => {
+    if(post?.User?.image){
+        Storage.get(post.User.image).then(setImageUri); // By using .then, no need to use async/await, and we assign the result to setImageUri
+    }
+}, [post])
 
   const navigateToUser = () => {
     if(post.User){
@@ -48,37 +57,12 @@ const FeedPost = ({post, isVisible}: IFeedPost) => {
     LayoutAnimation.configureNext(LayoutAnimation.Presets.spring);
   };
 
-  // let content;
-  // if (post.image) { /// HERE
-  //   content = (
-  //     <DoublePressable onDoublePress={toggleLike}>
-  //       <Image
-  //         source={{
-  //           uri: post.image,
-  //         }}
-  //         style={styles.image}
-  //       />
-  //     </DoublePressable>
-  //   );
-  // } else if (post.images) {
-  //   content = <Carousel images={post.images} onDoublePress={toggleLike} />;
-  // } else if (post.video){
-  //   content = (
-  //       <VideoPlayer uri={post.video} paused={!isVisible}/>
-  //   )
-  // }
-
   return (
     <View style={styles.post}>
       
       {/* Header */}
       <View style={styles.header}>
-        <Image
-          source={{
-            uri: post.User?.image || DEFAULT_USER_IMAGE,
-          }}
-          style={styles.userAvatar}
-        />
+        <UserImage imageKey={post?.User?.image || undefined }  />
         <Text onPress={navigateToUser} style={styles.userName}>{post.User?.username}</Text>
         <PostMenu post={post}/>
             

@@ -1,32 +1,39 @@
 import { View, Text, Image } from 'react-native'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './styles'
 import Button from '../../components/Button'
 import { useNavigation } from '@react-navigation/native';
 import { ProfileNavigationProp } from '../../types/navigation';
-import { Auth } from 'aws-amplify'
+import { Auth, Storage } from 'aws-amplify'
 import { User } from '../../API'
 import { DEFAULT_USER_IMAGE } from '../../config';
 import { useAuthContext } from '../../contexts/AuthContext';
+import UserImage from '../../components/UserImage/UserImage';
 
 interface IProfileHeader {
     user: User;
 
 }
 const ProfileHeader = ({user}: IProfileHeader) => {
+    const [imageUri, setImageUri] = useState<string | null>(null);
     const {userId} = useAuthContext();
     const navigation = useNavigation<ProfileNavigationProp>();
     const navigateToEditProfileScreen = () => {
         navigation.navigate("EditProfile")
     }
-    console.log(user.image);
+
+    useEffect(() => {
+        if(user.image){
+            Storage.get(user?.image).then(setImageUri); // By using .then, no need to use async/await, and we assign the result to setImageUri
+        }
+    }, [user])
     
     return (
       <View style={styles.root}>
           {/* Header Row */}
           <View style={styles.headerRow}>
               {/* Profile Image */}
-              <Image source={{uri: user.image || DEFAULT_USER_IMAGE}} style={styles.avatar}></Image>
+              <UserImage imageKey={user.image} width={100}/>
               {/* Posts, Follower, Following NUmber */}
               <View style={styles.numberContainer}>
                   <Text style={styles.numberText}>{user.nofPosts}</Text>

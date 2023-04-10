@@ -4,6 +4,7 @@ import fonts from '../../theme/fonts'
 import colors from '../../theme/colors'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import useCommentService from '../../services/CommentService/CommentService'
+import { useAuthContext } from '../../contexts/AuthContext'
 
 interface IInput {
   postId: string
@@ -13,15 +14,17 @@ const Input = ({postId}: IInput) => {
   const [newComment, setNewComment] = useState('')
   const insets = useSafeAreaInsets();
   const {onCreateComment} = useCommentService(postId)
-  
   const onPost = async () => {
     onCreateComment(newComment);
     setNewComment('');
   }
+  // const {user} = useAuthContext();
+
 
   return (
     <View style={[styles.root, {paddingBottom: insets.bottom }]}>
-      <Image source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/2.jpg'}} style={styles.avatar} />   
+      <Image source={{uri: 'https://notjustdev-dummy.s3.us-east-2.amazonaws.com/avatars/2.jpg'}} style={styles.avatar} />  
+      {/* <UserImage imageKey={user?.image || undefined } style={styles.avatar}  />  */}
       <TextInput 
         placeholder="Write your comment" 
         style={styles.input} 

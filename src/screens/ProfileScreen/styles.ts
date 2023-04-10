@@ -14,7 +14,6 @@ export default StyleSheet.create(
             marginVertical: 10,
         },
         avatar:{
-            width:100,
             aspectRatio: 1,
             borderRadius:50,
 

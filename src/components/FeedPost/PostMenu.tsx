@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from 'react-native'
+import { Text, StyleSheet, Alert } from 'react-native'
 import React from 'react'
 import { Menu, MenuOptions, MenuTrigger, MenuOption, renderers } from 'react-native-popup-menu'
 import Entypo from 'react-native-vector-icons/Entypo';
@@ -8,6 +8,7 @@ import { DeletePostMutation, DeletePostMutationVariables, Post } from '../../API
 import { useAuthContext } from '../../contexts/AuthContext';
 import { useNavigation } from '@react-navigation/native';
 import { FeedNavigationProp } from '../../types/navigation';
+import { Storage } from 'aws-amplify';
 
 // Si je veux utiliser des props, il faut utiliser une interface pour déclarer leur types
 interface IPostMenu {
@@ -49,6 +50,16 @@ const PostMenu = ({post}: IPostMenu) => {
   }
  
   const startDeletingPost = async ()  => {
+    if(post.image){
+      await Storage.remove(post.image);
+    }
+    if(post.images){
+      await Promise.all(post.images.map(image => Storage.remove(image)));
+    }
+    if(post.video){
+      await Storage.remove(post.video);
+    }
+    
     try {
       const response = await doDeletePost(); // J'aurais pu définir ici les options de variables aussi
     } catch (error) {

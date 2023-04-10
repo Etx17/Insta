@@ -6,6 +6,7 @@ import { Comment as CommentType} from '../../API';
 import { useState } from 'react';
 import {DEFAULT_USER_IMAGE} from '../../config'
 import dayjs from 'dayjs';
+import UserImage from '../UserImage/UserImage';
 interface ICommentProps {
     comment: CommentType;
     includeDetails?: boolean;
@@ -22,7 +23,7 @@ const Comment = ({comment, includeDetails = false, isNew = false}: ICommentProps
   return (
     <View style={styles.comment}>
         { includeDetails && (
-          <Image source={{uri: comment.User?.image || DEFAULT_USER_IMAGE }} style={styles.avatar} />
+          <UserImage imageKey={comment?.User?.image || undefined } width={40}/>
         )}
         <View style={styles.middleColumn}>
           <Text style={styles.commentText}>
@@ -50,12 +51,7 @@ const Comment = ({comment, includeDetails = false, isNew = false}: ICommentProps
 }
 
 const styles = StyleSheet.create({
-    avatar: {
-        width: 40,
-        aspectRatio: 1,
-        borderRadius: 25,
-        marginRight: 5,
-    },
+    
 
     bold: {
       fontWeight: fonts.weight.bold,
