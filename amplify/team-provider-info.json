@@ -62,5 +62,37 @@
         "storageinsta": {}
       }
     }
+  },
+  "prod": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-insta-prod-163759-authRole",
+      "UnauthRoleArn": "arn:aws:iam::117680609371:role/amplify-insta-prod-163759-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::117680609371:role/amplify-insta-prod-163759-authRole",
+      "Region": "eu-west-3",
+      "DeploymentBucketName": "amplify-insta-prod-163759-deployment",
+      "UnauthRoleName": "amplify-insta-prod-163759-unauthRole",
+      "StackName": "amplify-insta-prod-163759",
+      "StackId": "arn:aws:cloudformation:eu-west-3:117680609371:stack/amplify-insta-prod-163759/4bf8bd20-d7ad-11ed-8cc8-0a0767f0be34",
+      "AmplifyAppId": "d1qhrsojhchgsr",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-insta-prod-163759-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "auth": {
+        "Insta": {}
+      },
+      "function": {
+        "InstaPostConfirmation": {
+          "deploymentBucketName": "amplify-insta-prod-163759-deployment",
+          "s3Key": "amplify-builds/InstaPostConfirmation-7839625774784d576e6b-build.zip"
+        },
+        "Insta": {}
+      },
+      "api": {
+        "Insta": {}
+      },
+      "storage": {
+        "storageinsta": {}
+      }
+    }
   }
 }
