@@ -2,7 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import HomeScreen from "../screens/HomeScreen/HomeScreen";
 import ProfileScreen from "../screens/ProfileScreen";
 import { Image } from "react-native";
-import instalogo from "../assets/images/instalogo.png";
+import etx from '../assets/images/etx.png'
 import {HomeStackNavigatorParamsList} from '../types/navigation'
 import UpdatePostScreen from "../screens/UpdatePostScreen/UpdatePostScreen";
 import PostLikesScreen from "../screens/PostLikesScreen/PostLikesScreen";
@@ -39,7 +39,7 @@ const HomeStackNavigator = () => {
 }
 const HeaderTitle = () => {
     return (
-       <Image source={instalogo} resizeMode="contain" style={{width: 150, height: 40}}/>
+       <Image source={etx} resizeMode="contain" style={{width: 150, height: 40}}/>
     )
 }
 export default HomeStackNavigator;
