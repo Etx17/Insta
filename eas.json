@@ -1,0 +1,35 @@
+{
+  "cli": {
+    "version": ">= 3.9.1"
+  },
+  "build": {
+    
+    "development": {
+      "node": "14.18.1",
+      "distribution": "internal", 
+      "android": {
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "ios": {
+        "buildConfiguration": "Debug",
+        "resourceClass": "m-medium"
+      }
+    },
+    "preview": {
+      "node": "14.18.1",
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "m-medium"
+      }
+    },
+    "production": {
+      "node": "14.18.1",
+      "ios": {
+        "resourceClass": "m-medium"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

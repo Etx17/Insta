@@ -1,4 +1,9 @@
 {
   "name": "etxnative",
-  "displayName": "etxnativeglam etx"
+  "displayName": "etxnativeglam etx",
+  "extra": {
+    "eas": {
+      "projectId": "20533803-c1d8-4d19-9854-203861c1a6e7"
+    }
+  }
 }
